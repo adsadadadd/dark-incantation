@@ -1,0 +1,266 @@
+# ==========================================================
+#  Core — чат, личные сообщения и объявления (MiniMessage)
+#  Все форматы поддерживают MiniMessage (<red>, <#ff8800>, <gradient:...>, <bold>),
+#  legacy-коды (&a, &l, &#ff8800) и плейсхолдеры PlaceholderAPI (%...%) — PlaceholderAPI
+#  применяется только к формату, но никогда к тексту игрока.
+#  ВНИМАНИЕ: в этом файле <prefix>/<suffix> — префикс/суффикс игрока из Vault (LuckPerms),
+#  а не префикс плагина из messages.yml.
+# ==========================================================
+
+chat:
+  # true — локальный чат в радиусе local-radius + глобальный через global-symbol;
+  # false — весь чат глобальный.
+  local-chat: true
+  # Символ в начале сообщения, который отправляет его в глобальный чат
+  global-symbol: '!'
+  # Радиус локального чата (в блоках, в пределах одного мира)
+  local-radius: 200
+  # Сообщать отправителю, что его локальное сообщение никто не услышал (chat.no-one-heard в messages.yml)
+  notify-no-listeners: true
+  # Форматы чата. Плейсхолдеры: <prefix>, <suffix>, <player> (отображаемое имя / ник), <name> (настоящий ник),
+  # <guild_tag>, <guild_name>, <world>, <additional_suffix> (из группы), <message>
+  formats:
+    global: '<dark_gray>[<gold>G</gold>]</dark_gray> <guild_tag><prefix><player><suffix><additional_suffix><dark_gray>:</dark_gray> <white><message>'
+    local: '<dark_gray>[<yellow>L</yellow>]</dark_gray> <guild_tag><prefix><player><suffix><additional_suffix><dark_gray>:</dark_gray> <gray><message>'
+  # Как выводится <guild_tag>: <tag> — тег гильдии (MiniMessage от плагина гильдий), <guild_name> — название.
+  # Без гильдии <guild_tag> пустой. Пример со скобками: '<dark_gray>[</dark_gray><tag><dark_gray>]</dark_gray> '
+  guild-tag-format: '<tag> '
+  # Текст при наведении на ник в чате. Плейсхолдеры как в форматах + PlaceholderAPI
+  name-hover:
+    enabled: true
+    lines:
+      - '<gray>Игрок: <gold><name></gold>'
+      - '<gray>Мир: <white><world></white>'
+      - ''
+      - '<dark_gray>Нажмите, чтобы написать в личные сообщения'
+  # Действие при клике на ник: SUGGEST_COMMAND, RUN_COMMAND, COPY_TO_CLIPBOARD, OPEN_URL. <name> — ник игрока
+  name-click:
+    enabled: true
+    action: SUGGEST_COMMAND
+    value: '/msg <name> '
+  # Разрешить игрокам с правом core.chat.color legacy-коды (&a, &l, &#ff8800) в сообщениях
+  # (MiniMessage-теги цвета и оформления с этим правом разрешены всегда; click/hover и т.п. — никогда)
+  legacy-colors: true
+  # Задержка между сообщениями в чате (в секундах). Обход: core.chat.bypass-cooldown
+  cooldown: 3
+  # Сколько секунд после входа нельзя писать в чат. 0 — выключено. Обход: core.chat.bypass-cooldown
+  join-cooldown: 10
+  # Минимальное наигранное время для чата, донат-чата и личных сообщений (в секундах, 1800 = 30 минут).
+  # 0 — выключено. Обход: core.chat.bypass-playtime
+  minimal-playtime: 1800
+  # Сколько пустых строк отправляет /chat clear
+  clear-lines: 100
+  # Имя консоли в донат- и стафф-чате
+  console-name: '<red><bold>Консоль</bold></red>'
+  # Привилегии в чате. Используется первая подходящая группа сверху вниз: совпадает основная группа
+  # Vault (LuckPerms) или у игрока есть право core.chat.group.<название>.
+  #   prefix — заменяет префикс из Vault (пусто — префикс из Vault)
+  #   name-color / message-color — цвет ника / сообщения: '<#ffaa00>', '<gold>', '<gradient:#ff0000:#00ff00>', '<rainbow>'
+  #   additional-suffix — дополнительный суффикс (плейсхолдер <additional_suffix> в формате)
+  groups:
+    admin:
+      prefix: '<dark_red>[<red>Админ</red>]</dark_red> '
+      name-color: '<gradient:#ff5555:#ffaa00>'
+      message-color: '<#ffd27f>'
+      additional-suffix: ' <red>✦</red>'
+    moder:
+      prefix: ''
+      name-color: '<#55aaff>'
+      message-color: '<white>'
+      additional-suffix: ''
+    premium:
+      prefix: ''
+      name-color: '<gradient:#c084fc:#60a5fa>'
+      message-color: '<#f0e6ff>'
+      additional-suffix: ' <light_purple>★</light_purple>'
+    vip:
+      prefix: ''
+      name-color: '<#55ff55>'
+      message-color: ''
+      additional-suffix: ''
+  # Донат-чат (/donatechat). Видят игроки с правом core.donatechat.see. cooldown — в секундах
+  donate-chat:
+    format: '<gold>Донат-чат</gold> <dark_gray>|</dark_gray> <prefix><player><dark_gray>:</dark_gray> <white><message>'
+    cooldown: 30
+  # Чат персонала (/staffchat). Видят игроки с правом core.staffchat
+  staff-chat:
+    format: '<red>Персонал</red> <dark_gray>|</dark_gray> <prefix><player><dark_gray>:</dark_gray> <white><message>'
+    cooldown: 3
+
+# Сообщения входа/выхода (пусто — не показывать). Для игроков в ванише не показываются.
+# Плейсхолдеры: <player>, <name>, <prefix>, <suffix>, <online> + PlaceholderAPI
+join-quit:
+  join: '<dark_gray>[<green>+</green>]</dark_gray> <gray><player>'
+  quit: '<dark_gray>[<red>-</red>]</dark_gray> <gray><player>'
+  # Вместо обычного сообщения при первом входе (пусто — обычное сообщение)
+  first-join: '<gold><bold>[!]</bold></gold> <white>На сервер впервые зашёл <yellow><player></yellow>. Добро пожаловать!'
+  # Личное приветствие при входе (строка или список строк; пусто — не отправлять)
+  welcome:
+    - '<gray>Привет, <gold><name></gold>! Сейчас онлайн: <gold><online></gold>.'
+    - '<gray>Глобальный чат — поставьте <gold>!</gold> перед сообщением.'
+  # Титул при входе. fade-in / stay / fade-out — в тиках (20 тиков = 1 секунда)
+  title:
+    enabled: true
+    title: '<red><bold>Анархия</bold></red>'
+    subtitle: '<gray>Добро пожаловать, <white><name></white>'
+    fade-in: 10
+    stay: 60
+    fade-out: 20
+
+private-messages:
+  # Плейсхолдеры: <sender>, <sender_name>, <sender_prefix>, <target>, <target_name>, <target_prefix>, <message>
+  # (PlaceholderAPI вычисляется для отправителя)
+  formats:
+    # Что видит отправитель
+    sender: '<dark_gray>[<gold>ЛС</gold>]</dark_gray> <gray>Вы</gray> <yellow>→</yellow> <target_prefix><target><dark_gray>:</dark_gray> <white><message>'
+    # Что видит получатель
+    receiver: '<dark_gray>[<gold>ЛС</gold>]</dark_gray> <sender_prefix><sender> <yellow>→</yellow> <gray>Вам</gray><dark_gray>:</dark_gray> <white><message>'
+    # Что видят игроки с /socialspy (и консоль, если log-to-console: true)
+    social-spy: '<dark_gray>[<red>ЛС</red>]</dark_gray> <sender_prefix><sender> <yellow>→</yellow> <target_prefix><target><dark_gray>:</dark_gray> <white><message>'
+    # Команды игрока для /targetspy. Плейсхолдеры: <prefix>, <player>, <name>, <command>
+    target-spy: '<dark_gray>[<red>CMD</red>]</dark_gray> <prefix><player><dark_gray>:</dark_gray> <white><command>'
+  # Подсказка при наведении на сообщение (пусто — без подсказки)
+  hover:
+    sender: '<gray>Нажмите, чтобы написать ещё'
+    receiver: '<gray>Нажмите, чтобы ответить'
+  # Клик по сообщению подставляет /msg <ник>
+  click-to-reply: true
+  # Задержка между личными сообщениями (в секундах). Обход: core.msg.bypass-cooldown
+  cooldown: 3
+  # Дублировать личные сообщения в консоль
+  log-to-console: true
+  # Звук получателю (пустой key — без звука)
+  sound:
+    key: 'minecraft:block.bell.use'
+    volume: 1.0
+    pitch: 1.0
+  # Максимум игроков в списке игнорирования. 0 — без ограничения
+  ignore-limit: 100
+
+# Объявления на весь сервер. Плейсхолдеры: <player>, <name>, <prefix>, <suffix>, <message>
+#   cooldown — задержка в секундах (обход: core.broadcast.bypass-cooldown)
+#   price — цена в АР (0 — бесплатно; обход: core.broadcast.bypass-price)
+#   link-only — сообщение должно быть одной ссылкой на один из сайтов allowed-links (поддомены разрешены)
+#   sound — звук всем получателям (пустой key — без звука)
+# Радужные сообщения: оберните <message> в <rainbow>…</rainbow> или <gradient:#цвет1:#цвет2>…</gradient>.
+broadcasts:
+  # Имя отправителя, если объявление отправлено из консоли
+  console-name: '<red><bold>Сервер</bold></red>'
+  # /broadcast
+  broadcast:
+    format:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray><player> <gray>пишет всему серверу: <gold><message>'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    cooldown: 120
+    price: 0
+    link-only: false
+    allowed-links: []
+    sound:
+      key: 'minecraft:block.note_block.pling'
+      volume: 1.0
+      pitch: 1.0
+  # /adbroadcast — реклама
+  ad:
+    format:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Игрок <gold><player></gold> рекламирует: <rainbow><message></rainbow>'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    cooldown: 120
+    price: 100
+    link-only: false
+    allowed-links: []
+    sound:
+      key: ''
+  # /buybroadcast — покупка
+  buy:
+    format:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Игрок <gold><player></gold> покупает: <gradient:#55ff55:#55ffff><message></gradient>'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    cooldown: 120
+    price: 50
+    link-only: false
+    allowed-links: []
+    sound:
+      key: ''
+  # /sellbroadcast — продажа
+  sell:
+    format:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Игрок <gold><player></gold> продаёт: <gradient:#ffaa00:#ff5555><message></gradient>'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    cooldown: 120
+    price: 50
+    link-only: false
+    allowed-links: []
+    sound:
+      key: ''
+  # /streambroadcast <ссылка> — трансляция
+  stream:
+    format:
+      - '<white>Игрок <gold><player></gold> начал трансляцию!'
+      - '<white>Ссылка: <aqua><underlined><message></underlined></aqua>'
+    cooldown: 1800
+    price: 0
+    link-only: true
+    allowed-links: ['youtube.com', 'youtu.be', 'twitch.tv', 'kick.com', 'vk.com', 'vkvideo.ru', 'rutube.ru']
+    sound:
+      key: 'minecraft:entity.player.levelup'
+      volume: 1.0
+      pitch: 1.0
+  # /videobroadcast <ссылка> — новое видео
+  video:
+    format:
+      - '<white>Игрок <gold><player></gold> выпустил новое видео!'
+      - '<white>Ссылка: <aqua><underlined><message></underlined></aqua>'
+    cooldown: 1800
+    price: 0
+    link-only: true
+    allowed-links: ['youtube.com', 'youtu.be', 'vk.com', 'vkvideo.ru', 'rutube.ru']
+    sound:
+      key: 'minecraft:entity.player.levelup'
+      volume: 1.0
+      pitch: 1.0
+
+# Автоматические объявления в чат. Не получают игроки с правом core.announcer.exempt.
+# Плейсхолдеры: <prefix> (префикс плагина из messages.yml), <player>, <name>, <online> + PlaceholderAPI
+auto-broadcast:
+  enabled: true
+  # Интервал между объявлениями (в секундах)
+  interval: 300
+  # true — случайный порядок (без повтора подряд), false — по очереди
+  random: false
+  sound:
+    key: 'minecraft:block.note_block.chime'
+    volume: 0.6
+    pitch: 1.2
+  # Каждое объявление — строка или список строк (многострочное объявление)
+  messages:
+    - '<prefix><gray>Глобальный чат — поставьте <gold>!</gold> перед сообщением.'
+    - - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Не хотите видеть боссбар? <gold><click:run_command:/bossbartoggle>/bossbartoggle</click>'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    - '<prefix><gray>Личные сообщения: <gold>/msg</gold> <gray>и <gold>/r</gold><gray>. Отключить — <gold>/msgtoggle</gold>.'
+
+# Объявления в боссбаре (по очереди). Видят игроки, не отключившие их командой /bossbartoggle.
+#   title — заголовок (MiniMessage; <online> и серверные плейсхолдеры PlaceholderAPI, общие для всех)
+#   duration — сколько секунд показывать
+#   color — PINK, BLUE, RED, GREEN, YELLOW, PURPLE, WHITE
+#   overlay — PROGRESS, NOTCHED_6, NOTCHED_10, NOTCHED_12, NOTCHED_20
+#   progress — DECREASE (убывает), INCREASE (растёт), FULL (всегда полный)
+boss-bars:
+  enabled: true
+  entries:
+    discounts:
+      title: '<gray>Скидки на донат: <gold>www.example.ru</gold>'
+      duration: 15
+      color: RED
+      overlay: PROGRESS
+      progress: DECREASE
+    online:
+      title: '<gray>Сейчас онлайн: <green><online></green> <dark_gray>|</dark_gray> <gray>Глобальный чат: <gold>!сообщение'
+      duration: 10
+      color: YELLOW
+      overlay: NOTCHED_10
+      progress: DECREASE

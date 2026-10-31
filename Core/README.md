@@ -15,6 +15,7 @@
 - **GUI** построены на `InventoryHolder` (`Gui`, `PaginatedGui`): без глобальных списков и фоновых потоков.
 - **Телепортация** идёт через `TeleportService`: задержка с боссбаром и частицами, отмена при движении, уроне или начале боя, запоминание точки для `/back`, неуязвимость после прибытия, `teleportAsync`.
 - **Боевой режим** (`CombatManager`): метка PvP, запрет команд из списка, отключение полёта, наказание за выход в бою.
+- **Чат** на `AsyncChatEvent`: префиксы Vault, PlaceholderAPI, тег гильдии через `GuildTagProvider`, цвет сообщения по привилегии (HEX/MiniMessage).
 - **API для других плагинов**: `CoreAPI` (бой, телепортация, `/back`, ваниш, god, экономика) и `GuildTagProvider` (тег гильдии в чате). Оба регистрируются через `ServicesManager`.
 
 ## Таблицы MySQL
@@ -26,6 +27,7 @@
 - `warps.yml`: лимиты варпов, оценки и меню варпов.
 - `kits.yml`: наборы, меню наборов.
 - `killermoney.yml`: награды за убийство мобов и игроков.
+- `chat.yml`: форматы чата (глобальный/локальный), группы привилегий, ЛС, объявления, автосообщения, боссбары, сообщения входа/выхода.
 
 ## Хомы
 `/home` отключена: телепортироваться домой можно только Рогом телепортации (`GOAT_HORN` с меткой в PDC). ПКМ открывает меню домов. Рецепт, внешний вид, звук и перезарядка настраиваются в `settings.yml`.
@@ -127,5 +129,22 @@
 | `/baltop` | /balancetop, /topbal | `core.baltop` | Топ игроков по балансу |
 | `/kit` | /kits | `core.kit` | Наборы предметов |
 | `/enderchest` | /ec | `core.enderchest` | Эндер-сундук |
+| `/chat` |  | `core.chat` | Скрыть/показать чат; очистка и отключение чата для персонала |
+| `/chattoggle` |  | `core.chattoggle` | Скрыть или показать общий чат |
+| `/donatechat` | /dc | `core.donatechat` | Написать в донат-чат |
+| `/staffchat` | /sc | `core.staffchat` | Написать в чат персонала |
+| `/msg` | /m, /tell, /w, /pm | `core.msg` | Отправить личное сообщение |
+| `/reply` | /r | `core.reply` | Ответить на последнее личное сообщение |
+| `/msgtoggle` |  | `core.msgtoggle` | Включить или отключить личные сообщения |
+| `/ignore` |  | `core.ignore` | Игнорировать игрока или показать список игнорирования |
+| `/socialspy` |  | `core.socialspy` | Слежка за личными сообщениями |
+| `/targetspy` |  | `core.targetspy` | Слежка за командами игрока |
+| `/broadcast` | /bc | `core.broadcast` | Объявление на весь сервер |
+| `/adbroadcast` | /ad | `core.broadcast.ad` | Реклама на весь сервер |
+| `/buybroadcast` |  | `core.broadcast.buy` | Объявление о покупке |
+| `/sellbroadcast` |  | `core.broadcast.sell` | Объявление о продаже |
+| `/streambroadcast` | /stream | `core.broadcast.stream` | Сообщить о трансляции |
+| `/videobroadcast` | /video | `core.broadcast.video` | Сообщить о новом видео |
+| `/bossbartoggle` | /bossbar | `core.bossbartoggle` | Скрыть или показать объявления в боссбаре |
 
 Полный список прав с значениями по умолчанию — в `src/main/resources/plugin.yml`.

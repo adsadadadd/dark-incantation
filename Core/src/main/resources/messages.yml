@@ -956,3 +956,117 @@ reward:
     # Пустое сообщение — не показывать
     message: ''
     actionbar: '<green>+<amount></green> <gray>за <white><mob></white>'
+
+chat:
+  usage:
+    - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    - '<gold>┃ <gray>Скрыть/показать чат: <red>/chat toggle'
+    - '<gold>┃ <gray>Очистить чат: <red>/chat clear'
+    - '<gold>┃ <gray>Запретить писать в чат: <red>/chat mute'
+    - '<gold>┃ <gray>Разрешить писать в чат: <red>/chat unmute'
+    - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+  toggle-on: '<prefix><gray>Вы <green>включили</green> чат.'
+  toggle-off: '<prefix><gray>Вы <red>отключили</red> чат. Включить снова: <gold>/chattoggle</gold>.'
+  cleared: '<prefix><gray>Чат очищен игроком <gold><player></gold>.'
+  mute-enabled: '<prefix><red>Чат отключён</red> <gray>игроком <gold><player></gold>.'
+  mute-disabled: '<prefix><green>Чат снова включён</green> <gray>игроком <gold><player></gold>.'
+  already-muted: '<prefix><gray>Чат уже отключён.'
+  not-muted: '<prefix><gray>Чат и так включён.'
+  muted: '<prefix><red>Чат временно отключён администрацией.'
+  cooldown: '<prefix><gray>Не так быстро! Подождите ещё <gold><time></gold>.'
+  join-cooldown: '<prefix><gray>Вы только что зашли на сервер. Писать в чат можно через <gold><time></gold>.'
+  minimal-playtime: '<prefix><gray>Чат станет доступен, когда вы наиграете ещё <gold><time></gold>.'
+  empty-global: '<prefix><gray>Напишите сообщение после <gold><symbol></gold>.'
+  no-one-heard:
+    - ''
+    - ' <gold>Вас никто не услышал!'
+    - ' <gray>Чтобы написать в глобальный чат, поставьте <gold><bold><symbol></bold></gold> <gray>перед сообщением.'
+    - ''
+  donate-usage:
+    - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    - '<gold>┃ <gray>Написать в донат-чат: <red>/donatechat \<сообщение>'
+    - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+  staff-usage:
+    - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    - '<gold>┃ <gray>Написать в чат персонала: <red>/staffchat \<сообщение>'
+    - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+
+pm:
+  msg-usage:
+    - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    - '<gold>┃ <gray>Личное сообщение: <red>/msg \<игрок> \<сообщение>'
+    - '<gold>┃ <gray>Ответить: <red>/r \<сообщение>'
+    - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+  reply-usage:
+    - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    - '<gold>┃ <gray>Ответить на личное сообщение: <red>/reply \<сообщение>'
+    - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+  self: '<prefix><gray>Нельзя отправить сообщение самому себе.'
+  disabled: '<prefix><gray>Игрок <gold><player></gold> отключил личные сообщения.'
+  ignored: '<prefix><gray>Игрок <gold><player></gold> не принимает от вас сообщения.'
+  no-reply-target: '<prefix><gray>Вам некому ответить.'
+  cooldown: '<prefix><gray>Не так быстро! Подождите ещё <gold><time></gold>.'
+  toggle-on: '<prefix><gray>Вы <green>включили</green> личные сообщения.'
+  toggle-off: '<prefix><gray>Вы <red>отключили</red> личные сообщения.'
+  ignore-usage:
+    - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    - '<gold>┃ <gray>Игнорировать / перестать игнорировать: <red>/ignore \<игрок>'
+    - '<gold>┃ <gray>Список игнорируемых: <red>/ignore list'
+    - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+  ignore-self: '<prefix><gray>Нельзя игнорировать самого себя.'
+  ignore-exempt: '<prefix><gray>Игрока <gold><player></gold> нельзя игнорировать.'
+  ignore-limit: '<prefix><gray>В списке игнорирования не может быть больше <gold><limit></gold> игроков.'
+  ignore-added: '<prefix><gray>Вы добавили <gold><player></gold> в список игнорирования <dark_gray>(повторите команду, чтобы убрать)</dark_gray>.'
+  ignore-removed: '<prefix><gray>Вы убрали <gold><player></gold> из списка игнорирования.'
+  ignore-list: '<prefix><gray>Вы игнорируете (<gold><count></gold>): <players>'
+  ignore-list-entry: '<gold><player></gold>'
+  ignore-list-separator: '<gray>, </gray>'
+  ignore-list-hover: '<gray>Нажмите, чтобы перестать игнорировать <gold><player></gold>'
+  ignore-list-empty: '<prefix><gray>Ваш список игнорирования пуст.'
+  socialspy-on: '<prefix><gray>Слежка за личными сообщениями <green>включена</green>.'
+  socialspy-off: '<prefix><gray>Слежка за личными сообщениями <red>выключена</red>.'
+  targetspy-usage:
+    - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    - '<gold>┃ <gray>Следить за командами игрока (повторно — перестать): <red>/targetspy \<игрок>'
+    - '<gold>┃ <gray>Прекратить всю слежку: <red>/targetspy off'
+    - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+  targetspy-self: '<prefix><gray>Нельзя следить за самим собой.'
+  targetspy-on: '<prefix><gray>Вы следите за командами игрока <gold><player></gold>.'
+  targetspy-off: '<prefix><gray>Вы перестали следить за игроком <gold><player></gold>.'
+  targetspy-off-all: '<prefix><gray>Вы прекратили всю слежку за командами.'
+  targetspy-none: '<prefix><gray>Вы ни за кем не следите.'
+  targetspy-target-left: '<prefix><gray>Игрок <gold><player></gold> вышел с сервера, слежка прекращена.'
+
+broadcast:
+  usage:
+    broadcast:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Написать всему серверу: <red>/broadcast \<сообщение>'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    ad:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Дать рекламу на весь сервер: <red>/adbroadcast \<сообщение>'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    buy:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Объявление о покупке: <red>/buybroadcast \<что покупаете>'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    sell:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Объявление о продаже: <red>/sellbroadcast \<что продаёте>'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    stream:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Сообщить о трансляции: <red>/streambroadcast \<ссылка>'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    video:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Сообщить о новом видео: <red>/videobroadcast \<ссылка>'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+  invalid-link: '<prefix><gray>Укажите одну корректную ссылку. Разрешённые сайты: <gold><domains></gold>.'
+  link-hover: '<gray>Нажмите, чтобы открыть ссылку'
+  paid: '<prefix><gray>За объявление списано <gold><price></gold>.'
+
+announcer:
+  bossbar-on: '<prefix><gray>Вы <green>включили</green> объявления в боссбаре.'
+  bossbar-off: '<prefix><gray>Вы <red>отключили</red> объявления в боссбаре.'
