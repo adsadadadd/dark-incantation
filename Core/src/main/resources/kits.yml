@@ -1,0 +1,222 @@
+# ==========================================================
+#  Core — наборы предметов (/kit)
+#  Все тексты поддерживают MiniMessage.
+#  Наборы можно создавать в игре: /kit create <название> (предметы берутся из вашего инвентаря),
+#  /kit seticon <набор>, /kit delete <набор>. Остальные параметры настраиваются здесь, затем /core reload.
+# ==========================================================
+
+settings:
+  # Если предметы не помещаются в инвентарь: deny — не выдавать набор, drop — выбросить остаток на землю
+  full-inventory: deny
+  # Звук при получении набора. Пустой key — без звука
+  claim-sound:
+    key: 'minecraft:block.bell.use'
+    volume: 1.0
+    pitch: 1.0
+  # Звук при отказе (нет прав, перезарядка, нет денег)
+  error-sound:
+    key: 'minecraft:block.note_block.bass'
+    volume: 1.0
+    pitch: 0.8
+
+# Параметры набора:
+#   name        — название набора (плейсхолдер <kit> в сообщениях и меню)
+#   icon        — иконка в меню: material, name (по умолчанию = name), lore, glint
+#   slot        — слот в меню наборов; без него набор займёт первый свободный слот из gui.kits.content-slots
+#   cooldown    — перезарядка в секундах: -1 — можно получить только один раз, 0 — без перезарядки
+#   price       — цена покупки в АР (покупка не требует права и не учитывает перезарядку); 0 — не продаётся
+#   free        — можно ли получить бесплатно (нужно право permission и отсутствие перезарядки)
+#   permission  — право для бесплатного получения; по умолчанию core.kit.<название>, '' — доступно всем
+#   auto-equip  — сразу надеть броню из набора, если соответствующий слот брони пуст
+#   start       — выдавать новым игрокам при первом входе (для бесплатного набора с перезарядкой это считается получением)
+#   items       — предметы: сериализованные /kit create или вручную (material, amount, name, lore, enchantments)
+kits:
+  start:
+    name: '<green>Стартовый</green>'
+    icon:
+      material: LIME_SHULKER_BOX
+      lore:
+        - '<gray>Набор для новичков</gray>'
+    slot: 11
+    cooldown: -1
+    price: 0
+    free: true
+    permission: ''
+    auto-equip: true
+    start: true
+    items:
+      - material: STONE_SWORD
+        name: '<gray>Меч новичка</gray>'
+      - material: STONE_PICKAXE
+      - material: STONE_AXE
+      - material: LEATHER_CHESTPLATE
+      - material: BREAD
+        amount: 16
+      - material: TORCH
+        amount: 16
+  player:
+    name: '<gray>Игрок</gray>'
+    icon:
+      material: GRAY_SHULKER_BOX
+      lore:
+        - '<gray>Ежедневный набор для всех игроков</gray>'
+    slot: 13
+    cooldown: 86400
+    price: 50
+    free: true
+    permission: ''
+    auto-equip: true
+    start: false
+    items:
+      - material: IRON_SWORD
+        enchantments:
+          sharpness: 1
+      - material: IRON_HELMET
+      - material: IRON_CHESTPLATE
+      - material: IRON_LEGGINGS
+      - material: IRON_BOOTS
+      - material: COOKED_BEEF
+        amount: 32
+  vip:
+    name: '<gold><bold>VIP</bold></gold>'
+    icon:
+      material: ORANGE_SHULKER_BOX
+      lore:
+        - '<gray>Набор привилегии <gold>VIP</gold></gray>'
+      glint: true
+    slot: 15
+    cooldown: 172800
+    price: 500
+    free: true
+    permission: 'core.kit.vip'
+    auto-equip: true
+    start: false
+    items:
+      - material: DIAMOND_SWORD
+        name: '<aqua>Меч VIP</aqua>'
+        lore:
+          - '<gray>Из набора VIP</gray>'
+        enchantments:
+          sharpness: 3
+          unbreaking: 2
+      - material: DIAMOND_HELMET
+        enchantments:
+          protection: 2
+      - material: DIAMOND_CHESTPLATE
+        enchantments:
+          protection: 2
+      - material: DIAMOND_LEGGINGS
+        enchantments:
+          protection: 2
+      - material: DIAMOND_BOOTS
+        enchantments:
+          protection: 2
+      - material: GOLDEN_APPLE
+        amount: 8
+      - material: ENDER_PEARL
+        amount: 8
+
+gui:
+  # Меню наборов (/kit)
+  kits:
+    title: '<dark_gray>Меню ▸ Выбор набора</dark_gray>'
+    rows: 6
+    # Слоты для наборов без явного slot (по порядку)
+    content-slots: [10-16, 19-25, 28-34, 37-43]
+    filler:
+      material: GRAY_STAINED_GLASS_PANE
+      hide-tooltip: true
+      slots: [0-9, 17, 18, 26, 27, 35, 36, 44-53]
+    close:
+      slot: 49
+      material: SPECTRAL_ARROW
+      name: '<red>Закрыть</red>'
+    # Строки, добавляемые к описанию иконки набора по его статусу.
+    # Плейсхолдеры: <kit>, <time> — до конца перезарядки, <price> — цена, <cooldown> — перезарядка набора
+    status:
+      available:
+        - ''
+        - ' <gray>Статус: <green>доступен</green></gray>'
+      cooldown:
+        - ''
+        - ' <gray>Статус: <red>недоступен</red></gray>'
+        - ' <gray>Будет доступен через: <yellow><time></yellow></gray>'
+      used:
+        - ''
+        - ' <gray>Статус: <red>уже получен</red></gray>'
+        - ' <gray>Набор можно получить только один раз</gray>'
+      no-permission:
+        - ''
+        - ' <gray>Статус: <red>недоступен</red></gray>'
+        - ' <gray>Бесплатно — только для привилегий</gray>'
+      purchase-only:
+        - ''
+        - ' <gray>Статус: <yellow>только покупка</yellow></gray>'
+    # Добавляется, если набор продаётся
+    buy-lore:
+      - ' <gray>Также можно купить за: <aqua><price></aqua></gray>'
+    click-lore:
+      - ''
+      - '<green><bold>Нажмите</bold></green><gray>, чтобы посмотреть содержимое</gray>'
+
+  # Просмотр набора с кнопками «Получить» / «Купить»
+  content:
+    # <kit> — название набора
+    title: '<dark_gray>Наборы ▸ </dark_gray><kit>'
+    rows: 6
+    content-slots: [10-16, 19-25, 28-34, 37-43]
+    filler:
+      material: GRAY_STAINED_GLASS_PANE
+      hide-tooltip: true
+      slots: [0-9, 17, 18, 26, 27, 35, 36, 44-53]
+    previous-page:
+      slot: 47
+      material: ARROW
+      name: '<yellow>← Предыдущая страница</yellow>'
+      lore:
+        - '<gray>Сейчас: <white><page></white> из <white><pages></white></gray>'
+    next-page:
+      slot: 51
+      material: ARROW
+      name: '<yellow>Следующая страница →</yellow>'
+      lore:
+        - '<gray>Сейчас: <white><page></white> из <white><pages></white></gray>'
+    back:
+      slot: 49
+      material: SPECTRAL_ARROW
+      name: '<red>Назад</red>'
+    # Бесплатное получение. alone-slot — слот, если набор не продаётся
+    get:
+      slot: 3
+      alone-slot: 4
+      material: ENDER_EYE
+      name: '<gray>Получить набор <kit></gray>'
+      status:
+        available:
+          - ''
+          - ' <gray>Статус: <green>доступен</green></gray>'
+          - ''
+          - '<green><bold>Нажмите</bold></green><gray>, чтобы получить набор</gray>'
+        cooldown:
+          - ''
+          - ' <gray>Статус: <red>недоступен</red></gray>'
+          - ' <gray>Будет доступен через: <yellow><time></yellow></gray>'
+        used:
+          - ''
+          - ' <gray>Статус: <red>уже получен</red></gray>'
+        no-permission:
+          - ''
+          - ' <gray>Статус: <red>недоступен</red></gray>'
+          - ' <gray>Бесплатно — только для привилегий</gray>'
+        purchase-only: []
+    # Покупка за АР. alone-slot — слот, если набор нельзя получить бесплатно
+    buy:
+      slot: 5
+      alone-slot: 4
+      material: ENDER_PEARL
+      name: '<gray>Купить набор <kit></gray>'
+      lore:
+        - ''
+        - ' <gray>Стоимость: <aqua><price></aqua></gray>'
+        - ''
+        - '<green><bold>Нажмите</bold></green><gray>, чтобы купить</gray>'
