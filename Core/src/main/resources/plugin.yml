@@ -33,6 +33,125 @@ commands:
     usage: '/home'
     aliases: [homes]
 
+  # ---- gameplay
+  gamemode:
+    description: 'Изменить режим игры'
+    usage: '/gamemode <режим> [игрок]'
+    aliases: [gm]
+    permission: core.gamemode
+  gms:
+    description: 'Режим выживания'
+    usage: '/gms [игрок]'
+    permission: core.gamemode
+  gmc:
+    description: 'Творческий режим'
+    usage: '/gmc [игрок]'
+    permission: core.gamemode
+  gma:
+    description: 'Режим приключения'
+    usage: '/gma [игрок]'
+    permission: core.gamemode
+  gmsp:
+    description: 'Режим наблюдателя'
+    usage: '/gmsp [игрок]'
+    permission: core.gamemode
+  fly:
+    description: 'Включить/выключить полёт'
+    usage: '/fly [игрок]'
+    permission: core.fly
+  flyelytra:
+    description: 'Полёт на элитрах'
+    usage: '/flyelytra [игрок]'
+    aliases: [elytrafly]
+    permission: core.flyelytra
+  flyspeed:
+    description: 'Скорость полёта'
+    usage: '/flyspeed <1-10|reset> [игрок]'
+    permission: core.flyspeed
+  speed:
+    description: 'Скорость ходьбы (в полёте — скорость полёта)'
+    usage: '/speed <1-10|reset> [игрок]'
+    permission: core.speed
+  god:
+    description: 'Режим бога'
+    usage: '/god [игрок]'
+    permission: core.god
+  heal:
+    description: 'Исцелить'
+    usage: '/heal [игрок]'
+    permission: core.heal
+  feed:
+    description: 'Утолить голод'
+    usage: '/feed [игрок]'
+    aliases: [food]
+    permission: core.feed
+  ext:
+    description: 'Потушить огонь'
+    usage: '/ext [игрок]'
+    permission: core.ext
+  burn:
+    description: 'Поджечь игрока'
+    usage: '/burn <игрок> [секунды]'
+    permission: core.burn
+  milk:
+    description: 'Снять все эффекты'
+    usage: '/milk [игрок]'
+    permission: core.milk
+  kill:
+    description: 'Убить игрока'
+    usage: '/kill <игрок>'
+    permission: core.kill
+  suicide:
+    description: 'Покончить с собой'
+    usage: '/suicide'
+    permission: core.suicide
+  more:
+    description: 'Пополнить стак в руке'
+    usage: '/more'
+    aliases: [dupe]
+    permission: core.more
+  hat:
+    description: 'Надеть предмет из руки на голову'
+    usage: '/hat'
+    permission: core.hat
+  head:
+    description: 'Получить голову игрока'
+    usage: '/head [ник] [количество]'
+    aliases: [skull]
+    permission: core.head
+  repair:
+    description: 'Починить предметы'
+    usage: '/repair [hand|all]'
+    aliases: [fix]
+    permission: core.repair
+  itemrename:
+    description: 'Переименовать предмет в руке'
+    usage: '/itemrename <название|reset>'
+    aliases: [rename]
+    permission: core.itemrename
+  itemdb:
+    description: 'Информация о предмете в руке'
+    usage: '/itemdb'
+    aliases: [dura]
+    permission: core.itemdb
+  enchant:
+    description: 'Зачаровать предмет в руке'
+    usage: '/enchant <зачарование> [уровень]'
+    permission: core.enchant
+  give:
+    description: 'Выдать предмет'
+    usage: '/give <игрок> <предмет> [количество]'
+    permission: core.give
+  clearinventory:
+    description: 'Очистить инвентарь'
+    usage: '/clearinventory [игрок]'
+    aliases: [ci]
+    permission: core.clearinventory
+  firework:
+    description: 'Запустить фейерверки'
+    usage: '/firework [сила]'
+    permission: core.firework
+
 permissions:
   core.admin:
     description: 'Доступ к /core reload и /core horn'
@@ -67,3 +186,146 @@ permissions:
   core.combat.bypass:
     description: 'Не попадать в боевой режим'
     default: false
+
+  # ---- gameplay
+  core.gamemode:
+    description: 'Доступ к /gamemode, /gms, /gmc, /gma, /gmsp (нужно также право на режим)'
+    default: op
+  core.gamemode.others:
+    description: 'Изменение режима игры другим игрокам'
+    default: op
+  core.gamemode.survival:
+    description: 'Режим выживания'
+    default: op
+  core.gamemode.creative:
+    description: 'Творческий режим'
+    default: op
+  core.gamemode.adventure:
+    description: 'Режим приключения'
+    default: op
+  core.gamemode.spectator:
+    description: 'Режим наблюдателя'
+    default: op
+  core.fly:
+    description: 'Полёт (/fly); без этого права полёт не восстанавливается при входе'
+    default: op
+  core.fly.others:
+    description: 'Включение/выключение полёта другим игрокам'
+    default: op
+  core.fly.others.bypass-cooldown:
+    description: '/fly <игрок> без перезарядки'
+    default: op
+  core.fly.bypass-pickup:
+    description: 'Подбор предметов с включённым полётом'
+    default: op
+  core.flyelytra:
+    description: 'Полёт на элитрах (/flyelytra)'
+    default: op
+  core.flyelytra.others:
+    description: 'Полёт на элитрах другим игрокам'
+    default: op
+  core.flyspeed:
+    description: 'Изменение скорости полёта'
+    default: op
+  core.flyspeed.others:
+    description: 'Изменение скорости полёта другим игрокам'
+    default: op
+  core.speed:
+    description: 'Изменение скорости ходьбы'
+    default: op
+  core.speed.others:
+    description: 'Изменение скорости другим игрокам'
+    default: op
+  core.god:
+    description: 'Режим бога; без этого права режим снимается при входе'
+    default: op
+  core.god.others:
+    description: 'Режим бога другим игрокам'
+    default: op
+  core.god.bypass-pickup:
+    description: 'Подбор предметов в режиме бога'
+    default: op
+  core.heal:
+    description: 'Исцеление'
+    default: op
+  core.heal.others:
+    description: 'Исцеление других игроков'
+    default: op
+  core.feed:
+    description: 'Утоление голода'
+    default: op
+  core.feed.others:
+    description: 'Утоление голода другим игрокам'
+    default: op
+  core.ext:
+    description: 'Тушение огня'
+    default: op
+  core.ext.others:
+    description: 'Тушение других игроков'
+    default: op
+  core.burn:
+    description: 'Поджигание игроков'
+    default: op
+  core.milk:
+    description: 'Снятие эффектов'
+    default: op
+  core.milk.others:
+    description: 'Снятие эффектов с других игроков'
+    default: op
+  core.kill:
+    description: 'Убийство игроков (игнорирует режим бога)'
+    default: op
+  core.suicide:
+    description: 'Команда /suicide'
+    default: true
+  core.more:
+    description: 'Пополнение стака в руке'
+    default: op
+  core.hat:
+    description: 'Надеть предмет на голову'
+    default: op
+  core.head:
+    description: 'Получение голов игроков'
+    default: op
+  core.repair:
+    description: 'Починка предмета в руке'
+    default: op
+  core.repair.all:
+    description: 'Починка всех предметов (/repair all)'
+    default: op
+  core.repair.free:
+    description: 'Бесплатная починка'
+    default: op
+  core.itemrename:
+    description: 'Переименование предметов'
+    default: op
+  core.itemrename.color:
+    description: 'Цвета и форматирование (MiniMessage) в названии предмета'
+    default: op
+  core.itemrename.noprefix:
+    description: 'Переименование без приставки из настроек'
+    default: op
+  core.itemdb:
+    description: 'Информация о предмете в руке'
+    default: op
+  core.enchant:
+    description: 'Зачарование предмета в руке'
+    default: op
+  core.enchant.unsafe:
+    description: 'Зачарования выше максимального уровня, на неподходящие предметы и несовместимые'
+    default: op
+  core.give:
+    description: 'Выдача предметов'
+    default: op
+  core.clearinventory:
+    description: 'Очистка своего инвентаря'
+    default: op
+  core.clearinventory.others:
+    description: 'Очистка инвентаря других игроков'
+    default: op
+  core.firework:
+    description: 'Запуск фейерверков'
+    default: op
+  core.firework.bypass-cooldown:
+    description: '/firework без перезарядки'
+    default: op
