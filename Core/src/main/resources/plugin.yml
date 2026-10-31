@@ -33,6 +33,488 @@ commands:
     usage: '/home'
     aliases: [homes]
 
+  # ---- gameplay
+  gamemode:
+    description: 'Изменить режим игры'
+    usage: '/gamemode <режим> [игрок]'
+    aliases: [gm]
+    permission: core.gamemode
+  gms:
+    description: 'Режим выживания'
+    usage: '/gms [игрок]'
+    permission: core.gamemode
+  gmc:
+    description: 'Творческий режим'
+    usage: '/gmc [игрок]'
+    permission: core.gamemode
+  gma:
+    description: 'Режим приключения'
+    usage: '/gma [игрок]'
+    permission: core.gamemode
+  gmsp:
+    description: 'Режим наблюдателя'
+    usage: '/gmsp [игрок]'
+    permission: core.gamemode
+  fly:
+    description: 'Включить/выключить полёт'
+    usage: '/fly [игрок]'
+    permission: core.fly
+  flyelytra:
+    description: 'Полёт на элитрах'
+    usage: '/flyelytra [игрок]'
+    aliases: [elytrafly]
+    permission: core.flyelytra
+  flyspeed:
+    description: 'Скорость полёта'
+    usage: '/flyspeed <1-10|reset> [игрок]'
+    permission: core.flyspeed
+  speed:
+    description: 'Скорость ходьбы (в полёте — скорость полёта)'
+    usage: '/speed <1-10|reset> [игрок]'
+    permission: core.speed
+  god:
+    description: 'Режим бога'
+    usage: '/god [игрок]'
+    permission: core.god
+  heal:
+    description: 'Исцелить'
+    usage: '/heal [игрок]'
+    permission: core.heal
+  feed:
+    description: 'Утолить голод'
+    usage: '/feed [игрок]'
+    aliases: [food]
+    permission: core.feed
+  ext:
+    description: 'Потушить огонь'
+    usage: '/ext [игрок]'
+    permission: core.ext
+  burn:
+    description: 'Поджечь игрока'
+    usage: '/burn <игрок> [секунды]'
+    permission: core.burn
+  milk:
+    description: 'Снять все эффекты'
+    usage: '/milk [игрок]'
+    permission: core.milk
+  kill:
+    description: 'Убить игрока'
+    usage: '/kill <игрок>'
+    permission: core.kill
+  suicide:
+    description: 'Покончить с собой'
+    usage: '/suicide'
+    permission: core.suicide
+  more:
+    description: 'Пополнить стак в руке'
+    usage: '/more'
+    aliases: [dupe]
+    permission: core.more
+  hat:
+    description: 'Надеть предмет из руки на голову'
+    usage: '/hat'
+    permission: core.hat
+  head:
+    description: 'Получить голову игрока'
+    usage: '/head [ник] [количество]'
+    aliases: [skull]
+    permission: core.head
+  repair:
+    description: 'Починить предметы'
+    usage: '/repair [hand|all]'
+    aliases: [fix]
+    permission: core.repair
+  itemrename:
+    description: 'Переименовать предмет в руке'
+    usage: '/itemrename <название|reset>'
+    aliases: [rename]
+    permission: core.itemrename
+  itemdb:
+    description: 'Информация о предмете в руке'
+    usage: '/itemdb'
+    aliases: [dura]
+    permission: core.itemdb
+  enchant:
+    description: 'Зачаровать предмет в руке'
+    usage: '/enchant <зачарование> [уровень]'
+    permission: core.enchant
+  give:
+    description: 'Выдать предмет'
+    usage: '/give <игрок> <предмет> [количество]'
+    permission: core.give
+  clearinventory:
+    description: 'Очистить инвентарь'
+    usage: '/clearinventory [игрок]'
+    aliases: [ci]
+    permission: core.clearinventory
+  firework:
+    description: 'Запустить фейерверки'
+    usage: '/firework [сила]'
+    permission: core.firework
+
+  # ---- utility
+  workbench:
+    description: 'Открыть верстак'
+    usage: '/workbench [игрок]'
+    aliases: [wb, craft]
+    permission: core.workbench
+  anvil:
+    description: 'Открыть наковальню'
+    usage: '/anvil [игрок]'
+    permission: core.anvil
+  carttable:
+    description: 'Открыть стол картографа'
+    usage: '/carttable [игрок]'
+    aliases: [cartographytable]
+    permission: core.carttable
+  etable:
+    description: 'Открыть стол зачаровывания'
+    usage: '/etable [игрок]'
+    aliases: [enchanttable, enchantingtable]
+    permission: core.etable
+  grindstone:
+    description: 'Открыть точило'
+    usage: '/grindstone [игрок]'
+    permission: core.grindstone
+  loom:
+    description: 'Открыть ткацкий станок'
+    usage: '/loom [игрок]'
+    permission: core.loom
+  smithtable:
+    description: 'Открыть кузнечный стол'
+    usage: '/smithtable [игрок]'
+    aliases: [smithingtable]
+    permission: core.smithtable
+  stonecutter:
+    description: 'Открыть камнерез'
+    usage: '/stonecutter [игрок]'
+    permission: core.stonecutter
+  invsee:
+    description: 'Посмотреть инвентарь игрока'
+    usage: '/invsee <игрок>'
+    permission: core.invsee
+  vanish:
+    description: 'Режим невидимости'
+    usage: '/vanish [игрок]'
+    aliases: [v]
+    permission: core.vanish
+  spectate:
+    description: 'Слежка за игроком в режиме наблюдателя'
+    usage: '/spectate <игрок>'
+    aliases: [spec]
+    permission: core.spectate
+  spectatestop:
+    description: 'Закончить слежку за игроком'
+    usage: '/spectatestop'
+    aliases: [specstop, specoff]
+    permission: core.spectatestop
+  whois:
+    description: 'Информация об игроке'
+    usage: '/whois <игрок>'
+    permission: core.whois
+  realname:
+    description: 'Узнать настоящий ник игрока'
+    usage: '/realname <ник>'
+    aliases: [rn]
+    permission: core.realname
+  nick:
+    description: 'Установить ник'
+    usage: '/nick <ник|off> [игрок]'
+    aliases: [nickname]
+    permission: core.nick
+  kick:
+    description: 'Кикнуть игрока'
+    usage: '/kick <игрок> [причина]'
+    permission: core.kick
+  gc:
+    description: 'Состояние сервера: TPS, память, миры'
+    usage: '/gc'
+    aliases: [lag]
+    permission: core.gc
+  ping:
+    description: 'Пинг'
+    usage: '/ping [игрок]'
+    permission: core.ping
+  list:
+    description: 'Список игроков онлайн'
+    usage: '/list'
+    aliases: [online]
+    permission: core.list
+  near:
+    description: 'Игроки рядом'
+    usage: '/near [радиус]'
+    permission: core.near
+  getpos:
+    description: 'Координаты'
+    usage: '/getpos [игрок]'
+    aliases: [coords]
+    permission: core.getpos
+  compass:
+    description: 'Куда вы смотрите'
+    usage: '/compass'
+    permission: core.compass
+  gps:
+    description: 'Навигация к точке или игроку'
+    usage: '/gps <x> [y] <z> [мир] | <игрок> | off'
+    permission: core.gps
+  date:
+    description: 'Дата и время сервера'
+    usage: '/date'
+    permission: core.date
+  rules:
+    description: 'Правила сервера'
+    usage: '/rules'
+    aliases: [rule]
+    permission: core.rules
+  links:
+    description: 'Ссылки сервера'
+    usage: '/links'
+    aliases: [link]
+    permission: core.links
+  day:
+    description: 'Установить день'
+    usage: '/day [мир]'
+    permission: core.day
+  night:
+    description: 'Установить ночь'
+    usage: '/night [мир]'
+    permission: core.night
+  time:
+    description: 'Время мира'
+    usage: '/time [set] <day|night|noon|midnight|тики> [мир] | /time add <тики> [мир]'
+    permission: core.time
+  sun:
+    description: 'Ясная погода'
+    usage: '/sun [секунды] [мир]'
+    permission: core.sun
+  rain:
+    description: 'Дождь'
+    usage: '/rain [секунды] [мир]'
+    permission: core.rain
+  storm:
+    description: 'Гроза'
+    usage: '/storm [секунды] [мир]'
+    permission: core.storm
+  weather:
+    description: 'Погода мира'
+    usage: '/weather <clear|rain|thunder> [секунды] [мир]'
+    permission: core.weather
+  ptime:
+    description: 'Личное время'
+    usage: '/ptime [время|reset] [игрок]'
+    aliases: [playertime]
+    permission: core.ptime
+  pweather:
+    description: 'Личная погода'
+    usage: '/pweather [погода|reset] [игрок]'
+    aliases: [playerweather]
+    permission: core.pweather
+
+  # ---- travel
+  tp:
+    description: 'Телепортироваться к игроку или телепортировать игрока к другому'
+    usage: '/tp <игрок> [цель]'
+    permission: core.tp
+  tphere:
+    description: 'Телепортировать игрока к себе'
+    usage: '/tphere <игрок>'
+    permission: core.tphere
+  tppos:
+    description: 'Телепортироваться по координатам'
+    usage: '/tppos <x> <y> <z> [мир] [поворот наклон]'
+    permission: core.tppos
+  tpall:
+    description: 'Телепортировать всех игроков к себе'
+    usage: '/tpall'
+    permission: core.tpall
+  tpa:
+    description: 'Запросить телепортацию к игроку'
+    usage: '/tpa <игрок>'
+    aliases: [call]
+    permission: core.tpa
+  tpahere:
+    description: 'Позвать игрока к себе'
+    usage: '/tpahere <игрок>'
+    permission: core.tpahere
+  tpaccept:
+    description: 'Принять запрос на телепортацию'
+    usage: '/tpaccept [игрок]'
+    aliases: [tpyes, tpallow]
+    permission: core.tpaccept
+  tpdeny:
+    description: 'Отклонить запрос на телепортацию'
+    usage: '/tpdeny [игрок]'
+    aliases: [tpno]
+    permission: core.tpdeny
+  tpcancel:
+    description: 'Отменить свой запрос на телепортацию'
+    usage: '/tpcancel [игрок]'
+    aliases: [tpacancel]
+    permission: core.tpcancel
+  teleportcancel:
+    description: 'Отменить ожидание телепортации'
+    usage: '/teleportcancel'
+    permission: core.teleportcancel
+  tptoggle:
+    description: 'Включить или выключить телепортации к себе'
+    usage: '/tptoggle'
+    permission: core.tptoggle
+  back:
+    description: 'Вернуться на предыдущую позицию'
+    usage: '/back'
+    permission: core.back
+  top:
+    description: 'Подняться на самый верхний блок'
+    usage: '/top'
+    permission: core.top
+  setspawn:
+    description: 'Установить точку спавна'
+    usage: '/setspawn'
+    permission: core.setspawn
+  spawn:
+    description: 'Телепортироваться на спавн'
+    usage: '/spawn [игрок]'
+    permission: core.spawn
+  rtp:
+    description: 'Случайная телепортация'
+    usage: '/rtp [режим]'
+    aliases: [tpr, randomtp]
+    permission: core.rtp
+  warp:
+    description: 'Меню варпов или телепортация на варп'
+    usage: '/warp [варп]'
+    aliases: [warps]
+    permission: core.warp
+  setwarp:
+    description: 'Создать варп'
+    usage: '/setwarp <название> [описание]'
+    aliases: [createwarp, addwarp]
+    permission: core.setwarp
+  delwarp:
+    description: 'Удалить варп'
+    usage: '/delwarp <варп>'
+    aliases: [deletewarp, removewarp, remwarp]
+    permission: core.delwarp
+  warpinfo:
+    description: 'Информация о варпе'
+    usage: '/warpinfo <варп>'
+    permission: core.warpinfo
+  editwarp:
+    description: 'Изменить описание, иконку или позицию своего варпа'
+    usage: '/editwarp <варп> <description|icon|move> [значение]'
+    permission: core.editwarp
+  serverwarp:
+    description: 'Варпы сервера'
+    usage: '/serverwarp [create|delete|list|icon|slot|description|move]'
+    aliases: [systemwarp]
+    permission: core.serverwarp
+  killtop:
+    description: 'Топ игроков по убийствам'
+    usage: '/killtop [страница]'
+    aliases: [topkills, topkill]
+    permission: core.killtop
+  deathtop:
+    description: 'Топ игроков по смертям'
+    usage: '/deathtop [страница]'
+    aliases: [topdeaths]
+    permission: core.deathtop
+  baltop:
+    description: 'Топ игроков по балансу'
+    usage: '/baltop [страница]'
+    aliases: [balancetop, topbal]
+    permission: core.baltop
+
+  # ---- kits
+  kit:
+    description: 'Наборы предметов'
+    usage: '/kit [набор]'
+    aliases: [kits]
+    permission: core.kit
+  enderchest:
+    description: 'Эндер-сундук'
+    usage: '/enderchest [игрок]'
+    aliases: [ec]
+    permission: core.enderchest
+
+  # ---- chat
+  chat:
+    description: 'Скрыть/показать чат; очистка и отключение чата для персонала'
+    usage: '/chat [toggle|clear|mute|unmute]'
+    permission: core.chat
+  chattoggle:
+    description: 'Скрыть или показать общий чат'
+    usage: '/chattoggle'
+    permission: core.chattoggle
+  donatechat:
+    description: 'Написать в донат-чат'
+    usage: '/donatechat <сообщение>'
+    aliases: [dc]
+    permission: core.donatechat
+  staffchat:
+    description: 'Написать в чат персонала'
+    usage: '/staffchat <сообщение>'
+    aliases: [sc]
+    permission: core.staffchat
+  msg:
+    description: 'Отправить личное сообщение'
+    usage: '/msg <игрок> <сообщение>'
+    aliases: [m, tell, w, pm]
+    permission: core.msg
+  reply:
+    description: 'Ответить на последнее личное сообщение'
+    usage: '/reply <сообщение>'
+    aliases: [r]
+    permission: core.reply
+  msgtoggle:
+    description: 'Включить или отключить личные сообщения'
+    usage: '/msgtoggle'
+    permission: core.msgtoggle
+  ignore:
+    description: 'Игнорировать игрока или показать список игнорирования'
+    usage: '/ignore <игрок|list>'
+    permission: core.ignore
+  socialspy:
+    description: 'Слежка за личными сообщениями'
+    usage: '/socialspy'
+    permission: core.socialspy
+  targetspy:
+    description: 'Слежка за командами игрока'
+    usage: '/targetspy <игрок|off>'
+    permission: core.targetspy
+  broadcast:
+    description: 'Объявление на весь сервер'
+    usage: '/broadcast <сообщение>'
+    aliases: [bc]
+    permission: core.broadcast
+  adbroadcast:
+    description: 'Реклама на весь сервер'
+    usage: '/adbroadcast <сообщение>'
+    aliases: [ad]
+    permission: core.broadcast.ad
+  buybroadcast:
+    description: 'Объявление о покупке'
+    usage: '/buybroadcast <сообщение>'
+    permission: core.broadcast.buy
+  sellbroadcast:
+    description: 'Объявление о продаже'
+    usage: '/sellbroadcast <сообщение>'
+    permission: core.broadcast.sell
+  streambroadcast:
+    description: 'Сообщить о трансляции'
+    usage: '/streambroadcast <ссылка>'
+    aliases: [stream]
+    permission: core.broadcast.stream
+  videobroadcast:
+    description: 'Сообщить о новом видео'
+    usage: '/videobroadcast <ссылка>'
+    aliases: [video]
+    permission: core.broadcast.video
+  bossbartoggle:
+    description: 'Скрыть или показать объявления в боссбаре'
+    usage: '/bossbartoggle'
+    aliases: [bossbar]
+    permission: core.bossbartoggle
+
 permissions:
   core.admin:
     description: 'Доступ к /core reload и /core horn'
@@ -58,3 +540,593 @@ permissions:
   core.homes.unlimited:
     description: 'Без ограничения количества точек дома'
     default: op
+  core.teleport.bypass-warmup:
+    description: 'Телепортация без задержки'
+    default: op
+  core.back.ondeath:
+    description: 'Возврат на место смерти через /back'
+    default: true
+  core.combat.bypass:
+    description: 'Не попадать в боевой режим'
+    default: false
+
+  # ---- gameplay
+  core.gamemode:
+    description: 'Доступ к /gamemode, /gms, /gmc, /gma, /gmsp (нужно также право на режим)'
+    default: op
+  core.gamemode.others:
+    description: 'Изменение режима игры другим игрокам'
+    default: op
+  core.gamemode.survival:
+    description: 'Режим выживания'
+    default: op
+  core.gamemode.creative:
+    description: 'Творческий режим'
+    default: op
+  core.gamemode.adventure:
+    description: 'Режим приключения'
+    default: op
+  core.gamemode.spectator:
+    description: 'Режим наблюдателя'
+    default: op
+  core.fly:
+    description: 'Полёт (/fly); без этого права полёт не восстанавливается при входе'
+    default: op
+  core.fly.others:
+    description: 'Включение/выключение полёта другим игрокам'
+    default: op
+  core.fly.others.bypass-cooldown:
+    description: '/fly <игрок> без перезарядки'
+    default: op
+  core.fly.bypass-pickup:
+    description: 'Подбор предметов с включённым полётом'
+    default: op
+  core.flyelytra:
+    description: 'Полёт на элитрах (/flyelytra)'
+    default: op
+  core.flyelytra.others:
+    description: 'Полёт на элитрах другим игрокам'
+    default: op
+  core.flyspeed:
+    description: 'Изменение скорости полёта'
+    default: op
+  core.flyspeed.others:
+    description: 'Изменение скорости полёта другим игрокам'
+    default: op
+  core.speed:
+    description: 'Изменение скорости ходьбы'
+    default: op
+  core.speed.others:
+    description: 'Изменение скорости другим игрокам'
+    default: op
+  core.god:
+    description: 'Режим бога; без этого права режим снимается при входе'
+    default: op
+  core.god.others:
+    description: 'Режим бога другим игрокам'
+    default: op
+  core.god.bypass-pickup:
+    description: 'Подбор предметов в режиме бога'
+    default: op
+  core.heal:
+    description: 'Исцеление'
+    default: op
+  core.heal.others:
+    description: 'Исцеление других игроков'
+    default: op
+  core.feed:
+    description: 'Утоление голода'
+    default: op
+  core.feed.others:
+    description: 'Утоление голода другим игрокам'
+    default: op
+  core.ext:
+    description: 'Тушение огня'
+    default: op
+  core.ext.others:
+    description: 'Тушение других игроков'
+    default: op
+  core.burn:
+    description: 'Поджигание игроков'
+    default: op
+  core.milk:
+    description: 'Снятие эффектов'
+    default: op
+  core.milk.others:
+    description: 'Снятие эффектов с других игроков'
+    default: op
+  core.kill:
+    description: 'Убийство игроков (игнорирует режим бога)'
+    default: op
+  core.suicide:
+    description: 'Команда /suicide'
+    default: true
+  core.more:
+    description: 'Пополнение стака в руке'
+    default: op
+  core.hat:
+    description: 'Надеть предмет на голову'
+    default: op
+  core.head:
+    description: 'Получение голов игроков'
+    default: op
+  core.repair:
+    description: 'Починка предмета в руке'
+    default: op
+  core.repair.all:
+    description: 'Починка всех предметов (/repair all)'
+    default: op
+  core.repair.free:
+    description: 'Бесплатная починка'
+    default: op
+  core.itemrename:
+    description: 'Переименование предметов'
+    default: op
+  core.itemrename.color:
+    description: 'Цвета и форматирование (MiniMessage) в названии предмета'
+    default: op
+  core.itemrename.noprefix:
+    description: 'Переименование без приставки из настроек'
+    default: op
+  core.itemdb:
+    description: 'Информация о предмете в руке'
+    default: op
+  core.enchant:
+    description: 'Зачарование предмета в руке'
+    default: op
+  core.enchant.unsafe:
+    description: 'Зачарования выше максимального уровня, на неподходящие предметы и несовместимые'
+    default: op
+  core.give:
+    description: 'Выдача предметов'
+    default: op
+  core.clearinventory:
+    description: 'Очистка своего инвентаря'
+    default: op
+  core.clearinventory.others:
+    description: 'Очистка инвентаря других игроков'
+    default: op
+  core.firework:
+    description: 'Запуск фейерверков'
+    default: op
+  core.firework.bypass-cooldown:
+    description: '/firework без перезарядки'
+    default: op
+
+  # ---- utility
+  core.workbench:
+    description: 'Виртуальный верстак'
+    default: op
+  core.workbench.others:
+    description: 'Открыть верстак другому игроку'
+    default: op
+  core.anvil:
+    description: 'Виртуальная наковальня'
+    default: op
+  core.anvil.others:
+    description: 'Открыть наковальню другому игроку'
+    default: op
+  core.carttable:
+    description: 'Виртуальный стол картографа'
+    default: op
+  core.carttable.others:
+    description: 'Открыть стол картографа другому игроку'
+    default: op
+  core.etable:
+    description: 'Виртуальный стол зачаровывания'
+    default: op
+  core.etable.others:
+    description: 'Открыть стол зачаровывания другому игроку'
+    default: op
+  core.grindstone:
+    description: 'Виртуальное точило'
+    default: op
+  core.grindstone.others:
+    description: 'Открыть точило другому игроку'
+    default: op
+  core.loom:
+    description: 'Виртуальный ткацкий станок'
+    default: op
+  core.loom.others:
+    description: 'Открыть ткацкий станок другому игроку'
+    default: op
+  core.smithtable:
+    description: 'Виртуальный кузнечный стол'
+    default: op
+  core.smithtable.others:
+    description: 'Открыть кузнечный стол другому игроку'
+    default: op
+  core.stonecutter:
+    description: 'Виртуальный камнерез'
+    default: op
+  core.stonecutter.others:
+    description: 'Открыть камнерез другому игроку'
+    default: op
+  core.invsee:
+    description: 'Просмотр инвентаря игрока'
+    default: op
+  core.invsee.modify:
+    description: 'Изменение инвентаря игрока через /invsee'
+    default: op
+  core.invsee.exempt:
+    description: 'Инвентарь нельзя посмотреть через /invsee (кроме обладателей core.invsee.exempt.bypass)'
+    default: op
+  core.invsee.exempt.bypass:
+    description: 'Просмотр инвентаря защищённых игроков'
+    default: op
+  core.vanish:
+    description: 'Режим невидимости'
+    default: op
+  core.vanish.others:
+    description: 'Режим невидимости другим игрокам'
+    default: op
+  core.vanish.see:
+    description: 'Видеть невидимых игроков'
+    default: op
+  core.spectate:
+    description: 'Слежка за игроками'
+    default: op
+    children:
+      core.spectatestop: true
+  core.spectatestop:
+    description: 'Завершение слежки'
+    default: op
+  core.whois:
+    description: 'Информация об игроках'
+    default: op
+  core.whois.ip:
+    description: 'Видеть IP-адрес в /whois'
+    default: op
+  core.realname:
+    description: 'Узнать настоящий ник'
+    default: true
+  core.nick:
+    description: 'Установка своего ника'
+    default: op
+  core.nick.others:
+    description: 'Установка ника другим игрокам'
+    default: op
+  core.nick.color:
+    description: 'Цвета и стили MiniMessage в нике'
+    default: op
+  core.kick:
+    description: 'Кик игроков'
+    default: op
+  core.kick.color:
+    description: 'Цвета и стили MiniMessage в причине кика'
+    default: op
+  core.kick.exempt:
+    description: 'Защита от кика игроками (консоль может кикнуть)'
+    default: op
+  core.kick.notify:
+    description: 'Уведомления о киках'
+    default: op
+  core.gc:
+    description: 'Состояние сервера'
+    default: op
+  core.ping:
+    description: 'Свой пинг'
+    default: true
+  core.ping.others:
+    description: 'Пинг других игроков'
+    default: true
+  core.list:
+    description: 'Список игроков'
+    default: true
+  core.near:
+    description: 'Игроки рядом (увеличенный радиус: core.near.radius.<ключ> из settings.yml)'
+    default: op
+  core.getpos:
+    description: 'Свои координаты'
+    default: true
+  core.getpos.others:
+    description: 'Координаты других игроков'
+    default: op
+  core.compass:
+    description: 'Направление взгляда'
+    default: true
+  core.gps:
+    description: 'Навигация к координатам'
+    default: true
+  core.gps.player:
+    description: 'Навигация к игроку'
+    default: op
+  core.date:
+    description: 'Дата и время сервера'
+    default: true
+  core.rules:
+    description: 'Правила сервера'
+    default: true
+  core.links:
+    description: 'Ссылки сервера'
+    default: true
+  core.day:
+    description: 'Установка дня'
+    default: op
+  core.night:
+    description: 'Установка ночи'
+    default: op
+  core.time:
+    description: 'Управление временем мира'
+    default: op
+  core.time.bypass-cooldown:
+    description: 'Смена времени без перезарядки'
+    default: op
+  core.sun:
+    description: 'Установка ясной погоды'
+    default: op
+  core.rain:
+    description: 'Установка дождя'
+    default: op
+  core.storm:
+    description: 'Установка грозы'
+    default: op
+  core.weather:
+    description: 'Управление погодой мира'
+    default: op
+  core.weather.bypass-cooldown:
+    description: 'Смена погоды без перезарядки'
+    default: op
+  core.ptime:
+    description: 'Личное время'
+    default: op
+  core.ptime.others:
+    description: 'Личное время другим игрокам'
+    default: op
+  core.pweather:
+    description: 'Личная погода'
+    default: op
+  core.pweather.others:
+    description: 'Личная погода другим игрокам'
+    default: op
+
+  # ---- travel
+  core.tp:
+    description: 'Мгновенная телепортация к игроку (/tp)'
+    default: op
+  core.tp.others:
+    description: 'Телепортация одного игрока к другому (/tp <игрок> <цель>)'
+    default: op
+  core.tp.bypass-toggle:
+    description: 'Телепортация к игрокам с отключёнными телепортациями (/tptoggle) и игнором'
+    default: op
+  core.tphere:
+    description: 'Телепортировать игрока к себе'
+    default: op
+  core.tppos:
+    description: 'Телепортация по координатам'
+    default: op
+  core.tpall:
+    description: 'Телепортировать всех игроков к себе'
+    default: op
+  core.tpa:
+    description: 'Запрос на телепортацию к игроку'
+    default: true
+  core.tpahere:
+    description: 'Запрос игроку телепортироваться к вам'
+    default: true
+  core.tpaccept:
+    description: 'Принятие запросов на телепортацию'
+    default: true
+  core.tpdeny:
+    description: 'Отклонение запросов на телепортацию'
+    default: true
+  core.tpcancel:
+    description: 'Отмена своих запросов на телепортацию'
+    default: true
+  core.tpa.bypass-cooldown:
+    description: 'Отправка запросов на телепортацию без перезарядки'
+    default: op
+  core.teleportcancel:
+    description: 'Отмена своего ожидания телепортации'
+    default: true
+  core.tptoggle:
+    description: 'Включение и выключение телепортаций к себе'
+    default: true
+  core.back:
+    description: 'Возврат на предыдущую позицию (/back)'
+    default: true
+  core.back.bypass-block:
+    description: 'Подбор предметов сразу после /back'
+    default: op
+  core.top:
+    description: 'Подъём на самый верхний блок (/top)'
+    default: op
+  core.setspawn:
+    description: 'Установка точки спавна'
+    default: op
+  core.spawn:
+    description: 'Телепортация на спавн'
+    default: true
+  core.spawn.others:
+    description: 'Отправка других игроков на спавн'
+    default: op
+  core.rtp:
+    description: 'Случайная телепортация (обычный режим)'
+    default: true
+  core.rtp.far:
+    description: 'Дальняя случайная телепортация'
+    default: op
+  core.rtp.near:
+    description: 'Случайная телепортация к игрокам'
+    default: op
+  core.rtp.bypass-cooldown:
+    description: 'Случайная телепортация без перезарядки'
+    default: op
+  core.warp:
+    description: 'Меню варпов и телепортация на варпы'
+    default: true
+  core.setwarp:
+    description: 'Создание своих варпов (в пределах лимита)'
+    default: true
+  core.delwarp:
+    description: 'Удаление своих варпов'
+    default: true
+  core.warp.delete.others:
+    description: 'Удаление чужих варпов'
+    default: op
+  core.warp.unlimited:
+    description: 'Без ограничения количества варпов'
+    default: op
+  core.warp.limit.vip:
+    description: 'Лимит варпов группы vip (warps.yml → limits.groups)'
+    default: false
+  core.warp.limit.premium:
+    description: 'Лимит варпов группы premium (warps.yml → limits.groups)'
+    default: false
+  core.warp.limit.admin:
+    description: 'Лимит варпов группы admin (warps.yml → limits.groups)'
+    default: false
+  core.warpinfo:
+    description: 'Просмотр информации о варпе'
+    default: true
+  core.editwarp:
+    description: 'Изменение своих варпов'
+    default: true
+  core.editwarp.others:
+    description: 'Изменение чужих варпов'
+    default: op
+  core.serverwarp:
+    description: 'Меню варпов сервера'
+    default: true
+  core.serverwarp.admin:
+    description: 'Управление варпами сервера'
+    default: op
+  core.killtop:
+    description: 'Топ по убийствам'
+    default: true
+  core.deathtop:
+    description: 'Топ по смертям'
+    default: true
+  core.baltop:
+    description: 'Топ по балансу'
+    default: true
+
+  # ---- kits
+  core.kit:
+    description: 'Меню наборов и получение наборов'
+    default: true
+  core.kit.admin:
+    description: 'Создание, удаление и выдача наборов (/kit create|delete|seticon|give)'
+    default: op
+  core.kit.bypass-cooldown:
+    description: 'Получение наборов без перезарядки'
+    default: op
+  core.kit.vip:
+    description: 'Бесплатное получение набора vip (право набора: core.kit.<название>)'
+    default: false
+  core.enderchest:
+    description: 'Свой эндер-сундук (/ec и блок эндер-сундука)'
+    default: true
+  core.enderchest.others:
+    description: 'Просмотр эндер-сундука другого игрока (в том числе оффлайн)'
+    default: op
+  core.enderchest.others.edit:
+    description: 'Изменение эндер-сундука другого игрока'
+    default: op
+  core.reward.bypass-loss:
+    description: 'Не терять деньги при смерти от игрока'
+    default: false
+
+  # ---- chat
+  core.chat:
+    description: 'Команда /chat (скрыть/показать чат)'
+    default: true
+  core.chat.color:
+    description: 'Цвета и оформление (MiniMessage, &-коды) в сообщениях чата, ЛС и объявлений'
+    default: op
+  core.chat.bypass-cooldown:
+    description: 'Писать в чат без задержки и сразу после входа'
+    default: op
+  core.chat.bypass-playtime:
+    description: 'Писать в чат без минимального наигранного времени'
+    default: op
+  core.chat.clear:
+    description: 'Очистка чата (/chat clear)'
+    default: op
+  core.chat.clear.bypass:
+    description: 'Чат не очищается командой /chat clear'
+    default: op
+  core.chat.mute:
+    description: 'Отключение и включение чата (/chat mute, /chat unmute)'
+    default: op
+  core.chat.mute.bypass:
+    description: 'Писать в отключённый чат'
+    default: op
+  core.chattoggle:
+    description: 'Скрыть/показать общий чат'
+    default: true
+  core.donatechat:
+    description: 'Писать в донат-чат'
+    default: op
+    children:
+      core.donatechat.see: true
+  core.donatechat.see:
+    description: 'Видеть донат-чат'
+    default: op
+  core.donatechat.bypass-cooldown:
+    description: 'Донат-чат без задержки'
+    default: op
+  core.staffchat:
+    description: 'Писать в чат персонала и видеть его'
+    default: op
+  core.staffchat.bypass-cooldown:
+    description: 'Чат персонала без задержки'
+    default: op
+  core.msg:
+    description: 'Личные сообщения'
+    default: true
+  core.reply:
+    description: 'Ответ на личные сообщения'
+    default: true
+  core.msg.bypass-toggle:
+    description: 'Писать игрокам, отключившим личные сообщения'
+    default: op
+  core.msg.bypass-cooldown:
+    description: 'Личные сообщения без задержки'
+    default: op
+  core.msgtoggle:
+    description: 'Включение и отключение личных сообщений'
+    default: true
+  core.ignore:
+    description: 'Игнорирование игроков'
+    default: true
+  core.ignore.exempt:
+    description: 'Игрока нельзя игнорировать'
+    default: op
+  core.socialspy:
+    description: 'Слежка за личными сообщениями'
+    default: op
+  core.targetspy:
+    description: 'Слежка за командами игрока'
+    default: op
+  core.broadcast:
+    description: 'Объявление на весь сервер (/broadcast)'
+    default: op
+  core.broadcast.ad:
+    description: 'Реклама (/adbroadcast)'
+    default: true
+  core.broadcast.buy:
+    description: 'Объявление о покупке (/buybroadcast)'
+    default: true
+  core.broadcast.sell:
+    description: 'Объявление о продаже (/sellbroadcast)'
+    default: true
+  core.broadcast.stream:
+    description: 'Объявление о трансляции (/streambroadcast)'
+    default: op
+  core.broadcast.video:
+    description: 'Объявление о видео (/videobroadcast)'
+    default: op
+  core.broadcast.bypass-cooldown:
+    description: 'Объявления без задержки'
+    default: op
+  core.broadcast.bypass-price:
+    description: 'Бесплатные объявления'
+    default: op
+  core.announcer.exempt:
+    description: 'Не получать автоматические объявления в чате'
+    default: false
+  core.bossbartoggle:
+    description: 'Скрыть/показать объявления в боссбаре'
+    default: true
