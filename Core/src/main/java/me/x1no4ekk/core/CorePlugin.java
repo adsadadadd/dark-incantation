@@ -1,11 +1,14 @@
 package me.x1no4ekk.core;
 
+import me.x1no4ekk.core.api.CoreAPI;
+import me.x1no4ekk.core.api.CoreApiImpl;
+import me.x1no4ekk.core.combat.CombatManager;
 import me.x1no4ekk.core.command.CoreCommand;
 import me.x1no4ekk.core.command.DelHomeCommand;
 import me.x1no4ekk.core.command.HomeCommand;
 import me.x1no4ekk.core.command.PlayerHomeCommand;
 import me.x1no4ekk.core.command.SetHomeCommand;
-import me.x1no4ekk.core.config.ConfigFile;
+import me.x1no4ekk.core.config.ConfigFiles;
 import me.x1no4ekk.core.config.Messages;
 import me.x1no4ekk.core.config.Settings;
 import me.x1no4ekk.core.database.DatabaseManager;
@@ -13,19 +16,25 @@ import me.x1no4ekk.core.gui.GuiListener;
 import me.x1no4ekk.core.home.HomeManager;
 import me.x1no4ekk.core.home.HomeRepository;
 import me.x1no4ekk.core.home.HomeTeleporter;
+import me.x1no4ekk.core.hook.Hooks;
 import me.x1no4ekk.core.horn.HornListener;
 import me.x1no4ekk.core.horn.TeleportHorn;
+import me.x1no4ekk.core.module.CoreModule;
+import me.x1no4ekk.core.teleport.TeleportService;
 import me.x1no4ekk.core.user.UserListener;
 import me.x1no4ekk.core.user.UserManager;
 import me.x1no4ekk.core.user.UserRepository;
 import me.x1no4ekk.core.util.MainThreadExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.logging.Level;
 
@@ -35,18 +44,24 @@ public final class CorePlugin extends JavaPlugin {
     private Messages messages;
     private Executor mainThread;
     private DatabaseManager database;
+    private Hooks hooks;
     private UserManager userManager;
     private HomeManager homeManager;
     private HomeTeleporter homeTeleporter;
     private TeleportHorn teleportHorn;
+    private TeleportService teleportService;
+    private CombatManager combatManager;
+    private List<CoreModule> modules = List.of();
 
     @Override
     public void onEnable() {
         this.mainThread = new MainThreadExecutor(this);
         this.messages = new Messages(getLogger());
 
+        ConfigFiles files = new ConfigFiles(this);
         try {
-            loadConfiguration();
+            this.settings = Settings.load(files.settings());
+            messages.load(files.messages());
         } catch (Exception e) {
             getLogger().log(Level.SEVERE, "Invalid configuration (settings.yml / messages.yml): " + e.getMessage(), e);
             getServer().getPluginManager().disablePlugin(this);
@@ -70,12 +85,37 @@ public final class CorePlugin extends JavaPlugin {
             return;
         }
         this.database = db;
+        this.hooks = Hooks.create();
 
         HomeRepository homeRepository = new HomeRepository();
         this.userManager = new UserManager(this, database, new UserRepository(homeRepository), mainThread);
         this.homeManager = new HomeManager(getLogger(), database, homeRepository, this::settings, mainThread);
         this.teleportHorn = new TeleportHorn(this, this::settings);
         this.homeTeleporter = new HomeTeleporter(userManager, homeManager, teleportHorn, messages, mainThread);
+        this.teleportService = new TeleportService(this);
+        this.combatManager = new CombatManager(this);
+        this.modules = List.copyOf(createModules());
+
+        try {
+            database.execute(connection -> {
+                for (CoreModule module : modules) {
+                    module.createSchema(connection);
+                }
+                return null;
+            });
+        } catch (Exception e) {
+            getLogger().log(Level.SEVERE, "Core: could not create module tables in MySQL. The plugin is now DISABLED.", e);
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+
+        try {
+            loadModuleConfigs(files).forEach(Runnable::run);
+        } catch (Exception e) {
+            getLogger().log(Level.SEVERE, "Invalid configuration: " + e.getMessage(), e);
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
 
         PluginManager pluginManager = getServer().getPluginManager();
         pluginManager.registerEvents(new UserListener(userManager, messages, getLogger(),
@@ -89,8 +129,17 @@ public final class CorePlugin extends JavaPlugin {
         registerCommand("playerhome", new PlayerHomeCommand(this));
         registerCommand("home", new HomeCommand(this));
 
+        for (CoreModule module : modules) {
+            try {
+                module.enable();
+            } catch (RuntimeException e) {
+                getLogger().log(Level.SEVERE, "Module '" + module.id() + "' failed to enable", e);
+            }
+        }
+
         teleportHorn.registerRecipe();
         userManager.start(settings.users().autosaveIntervalMinutes());
+        getServer().getServicesManager().register(CoreAPI.class, new CoreApiImpl(this), this, ServicePriority.Normal);
 
         // Players already online (plugin enabled late / reloaded) missed AsyncPlayerPreLoginEvent.
         for (Player player : getServer().getOnlinePlayers()) {
@@ -98,12 +147,35 @@ public final class CorePlugin extends JavaPlugin {
             teleportHorn.discoverRecipe(player);
         }
 
-        getLogger().info("Core enabled: MySQL connected, " + getServer().getOnlinePlayers().size() + " online player(s) loading.");
+        getLogger().info("Core enabled: MySQL connected, " + modules.size() + " module(s), "
+                + getServer().getOnlinePlayers().size() + " online player(s) loading.");
+    }
+
+    /**
+     * Every feature module in enable order. Core services come first because features depend on them.
+     */
+    private List<CoreModule> createModules() {
+        List<CoreModule> list = new ArrayList<>();
+        list.add(teleportService);
+        list.add(combatManager);
+        return list;
     }
 
     @Override
     public void onDisable() {
+        getServer().getServicesManager().unregisterAll(this);
+        // Closing menus first lets modules save open containers while the database is still running.
         GuiListener.closeAll();
+        List<CoreModule> reversed = new ArrayList<>(modules);
+        Collections.reverse(reversed);
+        for (CoreModule module : reversed) {
+            try {
+                module.disable();
+            } catch (RuntimeException e) {
+                getLogger().log(Level.SEVERE, "Module '" + module.id() + "' failed to disable cleanly", e);
+            }
+        }
+        modules = List.of();
         if (teleportHorn != null) {
             teleportHorn.unregisterRecipe();
         }
@@ -116,32 +188,45 @@ public final class CorePlugin extends JavaPlugin {
         userManager = null;
         homeManager = null;
         homeTeleporter = null;
+        teleportService = null;
+        combatManager = null;
         database = null;
     }
 
-    private void loadConfiguration() throws Exception {
-        YamlConfiguration settingsFile = ConfigFile.load(this, "settings.yml");
-        YamlConfiguration messagesFile = ConfigFile.load(this, "messages.yml");
-        Settings loaded = Settings.load(settingsFile);
-        messages.load(messagesFile);
-        this.settings = loaded;
+    private List<Runnable> loadModuleConfigs(ConfigFiles files) throws Exception {
+        List<Runnable> commits = new ArrayList<>(modules.size());
+        for (CoreModule module : modules) {
+            try {
+                commits.add(module.loadConfig(files));
+            } catch (Exception e) {
+                throw new IllegalArgumentException("[" + module.id() + "] " + e.getMessage(), e);
+            }
+        }
+        return commits;
     }
 
     /**
-     * Reloads settings.yml and messages.yml. Database settings require a restart.
+     * Reloads every configuration file. All-or-nothing: if any file or module is invalid, nothing changes.
+     * Database settings require a restart.
      *
      * @throws Exception if a file is invalid; the previous settings remain active
      */
     public void reloadSettings() throws Exception {
-        YamlConfiguration settingsFile = ConfigFile.load(this, "settings.yml");
-        YamlConfiguration messagesFile = ConfigFile.load(this, "messages.yml");
-        Settings loaded = Settings.load(settingsFile);
+        ConfigFiles files = new ConfigFiles(this);
+        Settings loaded = Settings.load(files.settings());
+        var messagesFile = files.messages();
+        List<Runnable> commits = loadModuleConfigs(files);
+
         messages.load(messagesFile);
         this.settings = loaded;
+        commits.forEach(Runnable::run);
         teleportHorn.registerRecipe();
     }
 
-    private void registerCommand(String name, TabExecutor executor) {
+    /**
+     * Binds an executor to a command declared in plugin.yml.
+     */
+    public void registerCommand(String name, TabExecutor executor) {
         PluginCommand command = getCommand(name);
         if (command == null) {
             getLogger().warning("Command '" + name + "' is missing from plugin.yml");
@@ -169,6 +254,10 @@ public final class CorePlugin extends JavaPlugin {
         return database;
     }
 
+    public Hooks hooks() {
+        return hooks;
+    }
+
     public UserManager userManager() {
         return userManager;
     }
@@ -183,5 +272,25 @@ public final class CorePlugin extends JavaPlugin {
 
     public TeleportHorn teleportHorn() {
         return teleportHorn;
+    }
+
+    public TeleportService teleportService() {
+        return teleportService;
+    }
+
+    public CombatManager combatManager() {
+        return combatManager;
+    }
+
+    /**
+     * Finds an enabled module by type, or {@code null}.
+     */
+    public <T extends CoreModule> T module(Class<T> type) {
+        for (CoreModule module : modules) {
+            if (type.isInstance(module)) {
+                return type.cast(module);
+            }
+        }
+        return null;
     }
 }

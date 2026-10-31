@@ -141,3 +141,91 @@ home-gui:
     slot: 49
     material: SPECTRAL_ARROW
     name: '<red>Закрыть</red>'
+
+# ==========================================================
+#  Телепортация (общая для /spawn, /warp, /tpa, /rtp, /back и базы гильдии)
+# ==========================================================
+teleport:
+  # Задержка перед телепортацией (в секундах). 0 — мгновенно. Право core.teleport.bypass-warmup — без задержки.
+  warmup-seconds: 4
+  # Отменять телепортацию, если игрок сдвинулся с блока
+  cancel-on-move: true
+  # Отменять телепортацию при получении урона
+  cancel-on-damage: true
+  # Полоса прогресса во время ожидания (текст — teleport.bossbar в messages.yml)
+  bossbar:
+    enabled: true
+    # PINK, BLUE, RED, GREEN, YELLOW, PURPLE, WHITE
+    color: GREEN
+    # PROGRESS, NOTCHED_6, NOTCHED_10, NOTCHED_12, NOTCHED_20
+    overlay: PROGRESS
+  # Частицы вокруг игрока во время ожидания
+  particles:
+    enabled: true
+    color: '#00e676'
+    size: 1.0
+    count: 6
+  # Неуязвимость после телепортации (в секундах). 0 — выключено.
+  protection-seconds: 3.5
+  # Запоминать место смерти для /back (нужно право core.back.ondeath)
+  back-on-death: true
+  # Звук по прибытии. Пустой key — без звука.
+  arrival-sound:
+    key: 'minecraft:entity.enderman.teleport'
+    volume: 0.6
+    pitch: 1.2
+
+# ==========================================================
+#  Боевой режим (анти-релог)
+# ==========================================================
+combat:
+  enabled: true
+  # Сколько секунд длится бой после последнего удара
+  duration-seconds: 20
+  # Отключать полёт (/fly) на время боя и возвращать после
+  disable-fly: true
+  # Запрещать полёт на элитрах во время боя
+  disable-gliding: false
+  # Отменять ожидание телепортации при начале боя
+  cancel-teleport: true
+  # Обратный отсчёт над хотбаром
+  action-bar: true
+  # Миры, где бой не учитывается
+  disabled-worlds: []
+  commands:
+    # blacklist — запрещены команды из списка; whitelist — разрешены только команды из списка
+    mode: blacklist
+    # Можно указывать подкоманды: 'g home'
+    list:
+      - spawn
+      - warp
+      - warps
+      - tpa
+      - tpahere
+      - tpaccept
+      - tpyes
+      - back
+      - rtp
+      - fly
+      - ec
+      - enderchest
+      - kit
+      - kits
+      - home
+      - homes
+      - g home
+      - guild home
+      - guilds home
+  # Наказание за выход из игры во время боя
+  punish-on-quit:
+    enabled: true
+    # Убить игрока (вещи выпадут)
+    kill: true
+    # Сообщение всем игрокам (combat.logout-broadcast)
+    broadcast: true
+    # Команды от консоли. %player% — ник, %uuid% — UUID
+    commands: []
+    # Причины выхода, за которые наказывать: DISCONNECTED, TIMED_OUT, KICKED, ERRONEOUS_STATE
+    reasons:
+      - DISCONNECTED
+      - TIMED_OUT
