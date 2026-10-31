@@ -15,6 +15,14 @@ general:
   reloaded: '<prefix><green>Конфигурация перезагружена.'
   reload-failed: '<prefix><red>Ошибка в конфигурации, оставлены прежние настройки: <gray><error>'
   invalid-number: '<prefix><red><value></red> <gray>— не число.'
+  number-range: '<prefix><gray>Число должно быть от <gold><min></gold> до <gold><max></gold>.'
+  command-error: '<prefix><red>Произошла ошибка при выполнении команды. Подробности в консоли.'
+  not-enough-money: '<prefix><gray>Недостаточно средств. Нужно: <gold><price></gold>.'
+  economy-unavailable: '<prefix><red>Экономика недоступна (не найден плагин Economy/Vault).'
+  inventory-full: '<prefix><red>В инвентаре недостаточно места.'
+  no-item-in-hand: '<prefix><gray>Возьмите предмет в руку.'
+  cooldown: '<prefix><gray>Подождите ещё <gold><time></gold>.'
+  player-only-online: '<prefix><gray>Игрок <gold><player></gold> должен быть онлайн.'
 
 core:
   usage:
@@ -57,3 +65,22 @@ home:
 horn:
   no-permission: '<prefix><red>Вы не можете использовать Рог телепортации.'
   cooldown: '<prefix><gray>Рог перезаряжается ещё <gold><seconds></gold> сек.'
+
+teleport:
+  warmup: '<prefix><gray>Телепортация через <gold><seconds></gold> сек. Не двигайтесь!'
+  bossbar: '<green>Телепортация через <white><seconds></white> сек.'
+  cancelled-move: '<prefix><red>Телепортация отменена: вы сдвинулись с места.'
+  cancelled-damage: '<prefix><red>Телепортация отменена: вы получили урон.'
+  cancelled-combat: '<prefix><red>Телепортация отменена: вы вступили в бой.'
+  in-combat: '<prefix><red>Нельзя телепортироваться в бою! Осталось <gold><seconds></gold> сек.'
+  no-destination: '<prefix><red>Точка телепортации недоступна.'
+  failed: '<prefix><red>Телепортация не удалась.'
+
+combat:
+  tagged: '<prefix><red>Вы вступили в бой!</red> <gray>Не выходите из игры <gold><seconds></gold> сек., иначе погибнете.'
+  ended: '<prefix><green>Вы вышли из боя.'
+  action-bar: '<red>⚔ В бою: <white><seconds></white> сек.'
+  action-bar-ended: '<green>⚔ Вы вышли из боя'
+  command-blocked: '<prefix><red>Эта команда недоступна в бою! Осталось <gold><seconds></gold> сек.'
+  fly-disabled: '<prefix><gray>Полёт отключён на время боя.'
+  logout-broadcast: '<prefix><red><player></red> <gray>вышел из игры во время боя и погиб.'
