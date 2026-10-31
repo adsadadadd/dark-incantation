@@ -436,6 +436,85 @@ commands:
     aliases: [ec]
     permission: core.enderchest
 
+  # ---- chat
+  chat:
+    description: 'Скрыть/показать чат; очистка и отключение чата для персонала'
+    usage: '/chat [toggle|clear|mute|unmute]'
+    permission: core.chat
+  chattoggle:
+    description: 'Скрыть или показать общий чат'
+    usage: '/chattoggle'
+    permission: core.chattoggle
+  donatechat:
+    description: 'Написать в донат-чат'
+    usage: '/donatechat <сообщение>'
+    aliases: [dc]
+    permission: core.donatechat
+  staffchat:
+    description: 'Написать в чат персонала'
+    usage: '/staffchat <сообщение>'
+    aliases: [sc]
+    permission: core.staffchat
+  msg:
+    description: 'Отправить личное сообщение'
+    usage: '/msg <игрок> <сообщение>'
+    aliases: [m, tell, w, pm]
+    permission: core.msg
+  reply:
+    description: 'Ответить на последнее личное сообщение'
+    usage: '/reply <сообщение>'
+    aliases: [r]
+    permission: core.reply
+  msgtoggle:
+    description: 'Включить или отключить личные сообщения'
+    usage: '/msgtoggle'
+    permission: core.msgtoggle
+  ignore:
+    description: 'Игнорировать игрока или показать список игнорирования'
+    usage: '/ignore <игрок|list>'
+    permission: core.ignore
+  socialspy:
+    description: 'Слежка за личными сообщениями'
+    usage: '/socialspy'
+    permission: core.socialspy
+  targetspy:
+    description: 'Слежка за командами игрока'
+    usage: '/targetspy <игрок|off>'
+    permission: core.targetspy
+  broadcast:
+    description: 'Объявление на весь сервер'
+    usage: '/broadcast <сообщение>'
+    aliases: [bc]
+    permission: core.broadcast
+  adbroadcast:
+    description: 'Реклама на весь сервер'
+    usage: '/adbroadcast <сообщение>'
+    aliases: [ad]
+    permission: core.broadcast.ad
+  buybroadcast:
+    description: 'Объявление о покупке'
+    usage: '/buybroadcast <сообщение>'
+    permission: core.broadcast.buy
+  sellbroadcast:
+    description: 'Объявление о продаже'
+    usage: '/sellbroadcast <сообщение>'
+    permission: core.broadcast.sell
+  streambroadcast:
+    description: 'Сообщить о трансляции'
+    usage: '/streambroadcast <ссылка>'
+    aliases: [stream]
+    permission: core.broadcast.stream
+  videobroadcast:
+    description: 'Сообщить о новом видео'
+    usage: '/videobroadcast <ссылка>'
+    aliases: [video]
+    permission: core.broadcast.video
+  bossbartoggle:
+    description: 'Скрыть или показать объявления в боссбаре'
+    usage: '/bossbartoggle'
+    aliases: [bossbar]
+    permission: core.bossbartoggle
+
 permissions:
   core.admin:
     description: 'Доступ к /core reload и /core horn'
@@ -948,3 +1027,106 @@ permissions:
   core.reward.bypass-loss:
     description: 'Не терять деньги при смерти от игрока'
     default: false
+
+  # ---- chat
+  core.chat:
+    description: 'Команда /chat (скрыть/показать чат)'
+    default: true
+  core.chat.color:
+    description: 'Цвета и оформление (MiniMessage, &-коды) в сообщениях чата, ЛС и объявлений'
+    default: op
+  core.chat.bypass-cooldown:
+    description: 'Писать в чат без задержки и сразу после входа'
+    default: op
+  core.chat.bypass-playtime:
+    description: 'Писать в чат без минимального наигранного времени'
+    default: op
+  core.chat.clear:
+    description: 'Очистка чата (/chat clear)'
+    default: op
+  core.chat.clear.bypass:
+    description: 'Чат не очищается командой /chat clear'
+    default: op
+  core.chat.mute:
+    description: 'Отключение и включение чата (/chat mute, /chat unmute)'
+    default: op
+  core.chat.mute.bypass:
+    description: 'Писать в отключённый чат'
+    default: op
+  core.chattoggle:
+    description: 'Скрыть/показать общий чат'
+    default: true
+  core.donatechat:
+    description: 'Писать в донат-чат'
+    default: op
+    children:
+      core.donatechat.see: true
+  core.donatechat.see:
+    description: 'Видеть донат-чат'
+    default: op
+  core.donatechat.bypass-cooldown:
+    description: 'Донат-чат без задержки'
+    default: op
+  core.staffchat:
+    description: 'Писать в чат персонала и видеть его'
+    default: op
+  core.staffchat.bypass-cooldown:
+    description: 'Чат персонала без задержки'
+    default: op
+  core.msg:
+    description: 'Личные сообщения'
+    default: true
+  core.reply:
+    description: 'Ответ на личные сообщения'
+    default: true
+  core.msg.bypass-toggle:
+    description: 'Писать игрокам, отключившим личные сообщения'
+    default: op
+  core.msg.bypass-cooldown:
+    description: 'Личные сообщения без задержки'
+    default: op
+  core.msgtoggle:
+    description: 'Включение и отключение личных сообщений'
+    default: true
+  core.ignore:
+    description: 'Игнорирование игроков'
+    default: true
+  core.ignore.exempt:
+    description: 'Игрока нельзя игнорировать'
+    default: op
+  core.socialspy:
+    description: 'Слежка за личными сообщениями'
+    default: op
+  core.targetspy:
+    description: 'Слежка за командами игрока'
+    default: op
+  core.broadcast:
+    description: 'Объявление на весь сервер (/broadcast)'
+    default: op
+  core.broadcast.ad:
+    description: 'Реклама (/adbroadcast)'
+    default: true
+  core.broadcast.buy:
+    description: 'Объявление о покупке (/buybroadcast)'
+    default: true
+  core.broadcast.sell:
+    description: 'Объявление о продаже (/sellbroadcast)'
+    default: true
+  core.broadcast.stream:
+    description: 'Объявление о трансляции (/streambroadcast)'
+    default: op
+  core.broadcast.video:
+    description: 'Объявление о видео (/videobroadcast)'
+    default: op
+  core.broadcast.bypass-cooldown:
+    description: 'Объявления без задержки'
+    default: op
+  core.broadcast.bypass-price:
+    description: 'Бесплатные объявления'
+    default: op
+  core.announcer.exempt:
+    description: 'Не получать автоматические объявления в чате'
+    default: false
+  core.bossbartoggle:
+    description: 'Скрыть/показать объявления в боссбаре'
+    default: true

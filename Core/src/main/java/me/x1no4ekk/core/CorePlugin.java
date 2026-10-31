@@ -2,6 +2,10 @@ package me.x1no4ekk.core;
 
 import me.x1no4ekk.core.api.CoreAPI;
 import me.x1no4ekk.core.api.CoreApiImpl;
+import me.x1no4ekk.core.chat.AnnouncerModule;
+import me.x1no4ekk.core.chat.BroadcastModule;
+import me.x1no4ekk.core.chat.ChatModule;
+import me.x1no4ekk.core.chat.PrivateMessageModule;
 import me.x1no4ekk.core.combat.CombatManager;
 import me.x1no4ekk.core.command.CoreCommand;
 import me.x1no4ekk.core.command.DelHomeCommand;
@@ -185,6 +189,10 @@ public final class CorePlugin extends JavaPlugin {
         list.add(new KitModule(this));
         list.add(new EnderChestModule(this));
         list.add(new RewardModule(this));
+        list.add(new ChatModule(this));
+        list.add(new PrivateMessageModule(this));
+        list.add(new BroadcastModule(this));
+        list.add(new AnnouncerModule(this));
         return list;
     }
 
