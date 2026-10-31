@@ -58,3 +58,12 @@ permissions:
   core.homes.unlimited:
     description: 'Без ограничения количества точек дома'
     default: op
+  core.teleport.bypass-warmup:
+    description: 'Телепортация без задержки'
+    default: op
+  core.back.ondeath:
+    description: 'Возврат на место смерти через /back'
+    default: true
+  core.combat.bypass:
+    description: 'Не попадать в боевой режим'
+    default: false
