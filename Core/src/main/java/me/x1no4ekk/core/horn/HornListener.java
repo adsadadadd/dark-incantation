@@ -32,6 +32,8 @@ public final class HornListener implements Listener {
     }
 
     // Not ignoreCancelled: Bukkit marks RIGHT_CLICK_AIR interactions as cancelled by default.
+    // Material#isInteractable is deprecated without a replacement; it is still the best available check here.
+    @SuppressWarnings("deprecation")
     @EventHandler(priority = EventPriority.HIGH)
     public void onInteract(PlayerInteractEvent event) {
         Action action = event.getAction();

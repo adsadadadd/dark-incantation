@@ -1,9 +1,11 @@
 package me.x1no4ekk.core.config;
 
 import me.x1no4ekk.core.util.Text;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -78,5 +80,49 @@ public final class Messages {
             return; // an empty message disables it
         }
         sender.sendMessage(get(key, resolvers));
+    }
+
+    /**
+     * Sends the message above the hotbar. Empty templates are skipped.
+     */
+    public void sendActionBar(Audience audience, String key, TagResolver... resolvers) {
+        String template = templates.get(key);
+        if (template != null && template.isEmpty()) {
+            return;
+        }
+        audience.sendActionBar(get(key, resolvers));
+    }
+
+    /**
+     * Sends the message to every online player and the console. Empty templates are skipped.
+     */
+    public void broadcast(String key, TagResolver... resolvers) {
+        String template = templates.get(key);
+        if (template != null && template.isEmpty()) {
+            return;
+        }
+        Bukkit.getServer().sendMessage(get(key, resolvers));
+    }
+
+    /**
+     * @return {@code true} if the key exists and is not empty (i.e. the message is enabled)
+     */
+    public boolean isEnabled(String key) {
+        String template = templates.get(key);
+        return template != null && !template.isEmpty();
+    }
+
+    /**
+     * Raw MiniMessage template, or {@code null} if the key is missing.
+     */
+    public String template(String key) {
+        return templates.get(key);
+    }
+
+    /**
+     * Resolver for the {@code <prefix>} tag, for templates parsed outside this class.
+     */
+    public TagResolver prefixResolver() {
+        return prefix;
     }
 }
