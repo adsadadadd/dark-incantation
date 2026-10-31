@@ -52,6 +52,8 @@ public final class CorePlugin extends JavaPlugin {
     private TeleportService teleportService;
     private CombatManager combatManager;
     private List<CoreModule> modules = List.of();
+    /** Modules whose enable() completed; only these are disabled. */
+    private final List<CoreModule> enabledModules = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -132,6 +134,7 @@ public final class CorePlugin extends JavaPlugin {
         for (CoreModule module : modules) {
             try {
                 module.enable();
+                enabledModules.add(module);
             } catch (RuntimeException e) {
                 getLogger().log(Level.SEVERE, "Module '" + module.id() + "' failed to enable", e);
             }
@@ -158,6 +161,7 @@ public final class CorePlugin extends JavaPlugin {
         List<CoreModule> list = new ArrayList<>();
         list.add(teleportService);
         list.add(combatManager);
+        list.add(new me.x1no4ekk.core.gameplay.GameplayModule(this));
         return list;
     }
 
@@ -166,7 +170,7 @@ public final class CorePlugin extends JavaPlugin {
         getServer().getServicesManager().unregisterAll(this);
         // Closing menus first lets modules save open containers while the database is still running.
         GuiListener.closeAll();
-        List<CoreModule> reversed = new ArrayList<>(modules);
+        List<CoreModule> reversed = new ArrayList<>(enabledModules);
         Collections.reverse(reversed);
         for (CoreModule module : reversed) {
             try {
@@ -175,6 +179,7 @@ public final class CorePlugin extends JavaPlugin {
                 getLogger().log(Level.SEVERE, "Module '" + module.id() + "' failed to disable cleanly", e);
             }
         }
+        enabledModules.clear();
         modules = List.of();
         if (teleportHorn != null) {
             teleportHorn.unregisterRecipe();

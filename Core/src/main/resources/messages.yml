@@ -84,3 +84,232 @@ combat:
   command-blocked: '<prefix><red>Эта команда недоступна в бою! Осталось <gold><seconds></gold> сек.'
   fly-disabled: '<prefix><gray>Полёт отключён на время боя.'
   logout-broadcast: '<prefix><red><player></red> <gray>вышел из игры во время боя и погиб.'
+
+gameplay:
+  # Предметы не поместились в инвентарь (/give, /head)
+  dropped: '<prefix><gray>Часть предметов не поместилась в инвентарь и выпала рядом.'
+  pickup-blocked: '<prefix><gray>Нельзя подбирать предметы в режиме полёта или бога.'
+
+  gamemode:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Изменить режим игры: <red>/gamemode \<режим> [игрок]'
+      - '<gold>┃ <gray>Режимы: <red>0</red>/<red>s</red> — выживание, <red>1</red>/<red>c</red> — творческий,'
+      - '<gold>┃ <red>2</red>/<red>a</red> <gray>— приключение, <red>3</red>/<red>sp</red> <gray>— наблюдатель'
+      - '<gold>┃ <gray>Быстрые команды: <red>/gms</red>, <red>/gmc</red>, <red>/gma</red>, <red>/gmsp</red> <red>[игрок]'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    # <command> — введённая команда (gms, gmc, gma, gmsp)
+    short-usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Изменить режим игры: <red>/<command> [игрок]'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    unknown: '<prefix><gray>Режим игры <gold><mode></gold> не найден.'
+    already: '<prefix><gray>У вас уже режим игры <gold><mode></gold>.'
+    already-other: '<prefix><gray>У игрока <gold><player></gold> уже режим игры <gold><mode></gold>.'
+    cancelled: '<prefix><red>Не удалось изменить режим игры.'
+    changed: '<prefix><gray>Ваш режим игры изменён на <gold><mode></gold>.'
+    changed-other: '<prefix><gray>Режим игры игрока <gold><player></gold> изменён на <gold><mode></gold>.'
+    names:
+      survival: 'выживание'
+      creative: 'творческий'
+      adventure: 'приключение'
+      spectator: 'наблюдатель'
+
+  fly:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Включить/выключить полёт: <red>/fly [игрок]'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    enabled: '<prefix><gray>Полёт <green>включён</green>.'
+    disabled: '<prefix><gray>Полёт <red>выключен</red>.'
+    enabled-other: '<prefix><gray>Вы включили полёт игроку <gold><player></gold>.'
+    disabled-other: '<prefix><gray>Вы выключили полёт игроку <gold><player></gold>.'
+    in-combat: '<prefix><red>Нельзя включить полёт в бою! Осталось <gold><seconds></gold> сек.'
+    in-combat-other: '<prefix><red>Игрок <gold><player></gold> в бою — включить полёт нельзя.'
+
+  flyelytra:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Полёт на элитрах: <red>/flyelytra [игрок]'
+      - '<gold>┃ <gray>Пока надеты элитры, можно летать как с <red>/fly</red><gray>.'
+      - '<gold>┃ <gray>Каждая секунда полёта тратит прочность элитр.'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    enabled: '<prefix><gray>Полёт на элитрах <green>включён</green>. Наденьте элитры и взлетайте двойным прыжком.'
+    disabled: '<prefix><gray>Полёт на элитрах <red>выключен</red>.'
+    enabled-other: '<prefix><gray>Вы включили полёт на элитрах игроку <gold><player></gold>.'
+    disabled-other: '<prefix><gray>Вы выключили полёт на элитрах игроку <gold><player></gold>.'
+    feature-disabled: '<prefix><red>Полёт на элитрах отключён на сервере.'
+    broken: '<prefix><red>Ваши элитры почти сломаны — полёт невозможен. Почините их.'
+
+  speed:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Скорость ходьбы (в полёте — полёта): <red>/speed \<1-10|reset> [игрок]'
+      - '<gold>┃ <gray>Скорость полёта: <red>/flyspeed \<1-10|reset> [игрок]'
+      - '<gold>┃ <gray>1 — обычная скорость, 10 — максимальная.'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    walk: '<prefix><gray>Скорость ходьбы: <gold><speed></gold>.'
+    fly: '<prefix><gray>Скорость полёта: <gold><speed></gold>.'
+    walk-other: '<prefix><gray>Скорость ходьбы игрока <gold><player></gold>: <gold><speed></gold>.'
+    fly-other: '<prefix><gray>Скорость полёта игрока <gold><player></gold>: <gold><speed></gold>.'
+
+  god:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Режим бога: <red>/god [игрок]'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    enabled: '<prefix><gray>Режим бога <green>включён</green>.'
+    disabled: '<prefix><gray>Режим бога <red>выключен</red>.'
+    enabled-other: '<prefix><gray>Вы включили режим бога игроку <gold><player></gold>.'
+    disabled-other: '<prefix><gray>Вы выключили режим бога игроку <gold><player></gold>.'
+    # Над хотбаром, без <prefix>
+    pvp-blocked: '<red>Нельзя атаковать игроков в режиме бога'
+
+  heal:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Исцелить: <red>/heal [игрок]'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    self: '<prefix><gray>Вы полностью исцелены.'
+    other: '<prefix><gray>Вы исцелили игрока <gold><player></gold>.'
+    dead: '<prefix><red>Игрок <gold><player></gold> мёртв.'
+
+  feed:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Утолить голод: <red>/feed [игрок]'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    self: '<prefix><gray>Вы больше не голодны.'
+    other: '<prefix><gray>Игрок <gold><player></gold> больше не голоден.'
+
+  ext:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Потушить: <red>/ext [игрок]'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    self: '<prefix><gray>Вы потушены.'
+    other: '<prefix><gray>Вы потушили игрока <gold><player></gold>.'
+
+  burn:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Поджечь игрока: <red>/burn \<игрок> [секунды]'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    done: '<prefix><gray>Вы подожгли игрока <gold><player></gold> на <gold><seconds></gold> сек.'
+
+  milk:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Снять все эффекты: <red>/milk [игрок]'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    # <effects> — список снятых эффектов
+    self: '<prefix><gray>С вас сняты эффекты: <gold><effects></gold>.'
+    other: '<prefix><gray>С игрока <gold><player></gold> сняты эффекты: <gold><effects></gold>.'
+    nothing: '<prefix><gray>У вас нет активных эффектов.'
+    nothing-other: '<prefix><gray>У игрока <gold><player></gold> нет активных эффектов.'
+
+  kill:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Убить игрока: <red>/kill \<игрок>'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    done: '<prefix><gray>Вы убили игрока <gold><player></gold>.'
+    already-dead: '<prefix><gray>Игрок <gold><player></gold> уже мёртв.'
+
+  suicide:
+    done: '<prefix><gray>Вы умерли.'
+
+  more:
+    done: '<prefix><gray>Стак <gold><item></gold> пополнен до <gold><amount></gold> шт.'
+    full: '<prefix><gray>Стак в руке уже полный.'
+
+  hat:
+    done: '<prefix><gray>Вы надели <gold><item></gold> на голову.'
+    removed: '<prefix><gray>Вы сняли предмет с головы.'
+    binding: '<prefix><red>Предмет с проклятием несъёмности снять нельзя.'
+
+  head:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Получить голову игрока: <red>/head [ник] [количество]'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    given: '<prefix><gray>Вы получили голову игрока <gold><player></gold> <gray>x<gold><amount></gold>.'
+    invalid-name: '<prefix><red>Некорректный ник: <gold><player></gold>.'
+
+  repair:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Починить предмет в руке: <red>/repair [hand]'
+      - '<gold>┃ <gray>Починить все предметы: <red>/repair all'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    # <items> — названия починенных предметов, <price> — списанная сумма
+    repaired: '<prefix><gray>Починено: <gold><items></gold>.'
+    repaired-paid: '<prefix><gray>Починено: <gold><items></gold> <gray>за <gold><price></gold>.'
+    nothing: '<prefix><gray>Вам нечего чинить.'
+    not-repairable: '<prefix><red>Этот предмет нельзя починить.'
+    not-damaged: '<prefix><gray>Этот предмет не повреждён.'
+
+  itemrename:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Переименовать предмет в руке: <red>/itemrename \<название>'
+      - '<gold>┃ <gray>Сбросить название: <red>/itemrename reset'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    renamed: '<prefix><gray>Предмет переименован: <name>'
+    reset: '<prefix><gray>Название предмета сброшено.'
+    too-long: '<prefix><red>Слишком длинное название (максимум <gold><max></gold> символов).'
+
+  itemdb:
+    info:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Предмет: <white><item></white> <dark_gray>(<material>)'
+      - '<gold>┃ <gray>Количество: <gold><amount></gold> <gray>из <gold><max_stack></gold>'
+      - '<gold>┃ <gray>Прочность: <gold><durability>'
+      - '<gold>┃ <gray>Своё название: <white><custom_name>'
+      - '<gold>┃ <gray>Зачарования: <white><enchantments>'
+      - '<gold>┃ <gray>Custom model data: <white><model_data>'
+      - '<gold>┃ <gray>Для /give: <give>'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    none: '<dark_gray>нет'
+    unbreakable: '<green>неразрушимый'
+    copy: '<yellow>[нажмите, чтобы скопировать]'
+
+  enchant:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Зачаровать предмет в руке: <red>/enchant \<зачарование> [уровень]'
+      - '<gold>┃ <gray>Снять зачарование: <red>/enchant \<зачарование> 0'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    unknown: '<prefix><gray>Зачарование <gold><enchantment></gold> не найдено.'
+    applied: '<prefix><gray>Предмет зачарован: <gold><enchantment></gold>.'
+    removed: '<prefix><gray>Зачарование <gold><enchantment></gold> снято.'
+    not-present: '<prefix><gray>На предмете нет зачарования <gold><enchantment></gold>.'
+    max-level: '<prefix><red>Максимальный уровень зачарования <gold><enchantment></gold>: <gold><max></gold>.'
+    unsuitable: '<prefix><red>Зачарование <gold><enchantment></gold> нельзя наложить на этот предмет.'
+    conflict: '<prefix><red>Зачарование <gold><enchantment></gold> несовместимо с <gold><other></gold>.'
+
+  give:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Выдать предмет: <red>/give \<игрок> \<предмет> [количество]'
+      - '<gold>┃ <gray>Пример: <red>/give Steve diamond_sword[enchantments={sharpness:5}] 1'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    # <error> — описание ошибки от сервера
+    invalid-item: '<prefix><red>Не удалось создать предмет <gold><item></gold>: <gray><error>'
+    given: '<prefix><gray>Игроку <gold><player></gold> выдано: <gold><item></gold> <gray>x<gold><amount></gold>.'
+    received: '<prefix><gray>Вы получили <gold><item></gold> <gray>x<gold><amount></gold>.'
+
+  clearinventory:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Очистить инвентарь: <red>/clearinventory [игрок]'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    self: '<prefix><gray>Ваш инвентарь очищен.'
+    other: '<prefix><gray>Вы очистили инвентарь игрока <gold><player></gold>.'
+
+  firework:
+    usage:
+      - '<gold>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+      - '<gold>┃ <gray>Запустить фейерверки: <red>/firework [сила]'
+      - '<gold>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    launched: '<prefix><gray>Вы запустили фейерверки!'
