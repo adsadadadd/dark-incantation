@@ -1,0 +1,78 @@
+# ==========================================================
+#  Core — награды за убийства (АР через Economy/Vault)
+#  Тексты сообщений по умолчанию — секция reward в messages.yml.
+# ==========================================================
+
+# Включить награды
+enabled: true
+# Миры, где награды не выдаются
+disabled-worlds: []
+
+# Убийство игрока: часть баланса жертвы переходит убийце.
+# Право core.reward.bypass-loss — жертва ничего не теряет, убийца ничего не получает.
+player:
+  enabled: true
+  # Процент от баланса жертвы (0-100)
+  percent: 10
+  # Минимальная сумма (но не больше баланса жертвы)
+  min: 0
+  # Максимальная сумма. 0 — без ограничения
+  max: 5000
+  # Звук убийце и жертве. Пустой key — без звука
+  killer-sound:
+    key: 'minecraft:block.note_block.pling'
+    volume: 1.0
+    pitch: 1.2
+  victim-sound:
+    key: ''
+  # Команды от консоли. %killer% — убийца, %target% — жертва, %amount% — сумма
+  commands: []
+
+# Убийство мобов
+mobs:
+  enabled: true
+  # Мобы, появившиеся по этим причинам, награду не дают.
+  # SPAWNER — спавнер, TRIAL_SPAWNER — испытательный спавнер, SPAWNER_EGG — яйцо призыва, BREEDING — размножение
+  ignored-spawn-reasons:
+    - SPAWNER
+  # Звук по умолчанию. Пустой key — без звука
+  sound:
+    key: 'minecraft:entity.experience_orb.pickup'
+    volume: 0.6
+    pitch: 1.0
+  # Награды по типам мобов (названия как в EntityType: ZOMBIE, CREEPER...).
+  #   reward    — сумма или диапазон, например '5-50' (дробные границы — случайная сумма с копейками)
+  #   message   — свой текст в чат вместо reward.mob.message ('' — не показывать). <amount>, <mob>
+  #   actionbar — свой текст над хотбаром вместо reward.mob.actionbar ('' — не показывать)
+  #   sound     — свой звук
+  #   commands  — команды от консоли: %killer% — игрок, %target% — тип моба, %amount% — сумма
+  types:
+    ZOMBIE:
+      reward: '1-5'
+    HUSK:
+      reward: '1-5'
+    DROWNED:
+      reward: '1-5'
+    SKELETON:
+      reward: '2-6'
+    SPIDER:
+      reward: '1-4'
+    CREEPER:
+      reward: '5-50'
+    ENDERMAN:
+      reward: '10-30'
+    BLAZE:
+      reward: '10-25'
+    WITCH:
+      reward: '10-25'
+    WITHER_SKELETON:
+      reward: '20-50'
+    WARDEN:
+      reward: '500-1000'
+      message: '<prefix><gray>Вы победили <dark_aqua>Хранителя</dark_aqua> и получили <gold><amount></gold>!'
+    WITHER:
+      reward: '1000'
+      message: '<prefix><gray>Вы победили <dark_purple>Иссушителя</dark_purple> и получили <gold><amount></gold>!'
+    ENDER_DRAGON:
+      reward: '2500'
+      message: '<prefix><gray>Вы победили <light_purple>Эндер-дракона</light_purple> и получили <gold><amount></gold>!'

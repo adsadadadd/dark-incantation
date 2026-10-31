@@ -12,6 +12,8 @@ import me.x1no4ekk.core.config.ConfigFiles;
 import me.x1no4ekk.core.config.Messages;
 import me.x1no4ekk.core.config.Settings;
 import me.x1no4ekk.core.database.DatabaseManager;
+import me.x1no4ekk.core.enderchest.EnderChestModule;
+import me.x1no4ekk.core.gameplay.GameplayModule;
 import me.x1no4ekk.core.gui.GuiListener;
 import me.x1no4ekk.core.home.HomeManager;
 import me.x1no4ekk.core.home.HomeRepository;
@@ -19,12 +21,22 @@ import me.x1no4ekk.core.home.HomeTeleporter;
 import me.x1no4ekk.core.hook.Hooks;
 import me.x1no4ekk.core.horn.HornListener;
 import me.x1no4ekk.core.horn.TeleportHorn;
+import me.x1no4ekk.core.kit.KitModule;
 import me.x1no4ekk.core.module.CoreModule;
+import me.x1no4ekk.core.reward.RewardModule;
 import me.x1no4ekk.core.teleport.TeleportService;
+import me.x1no4ekk.core.top.TopModule;
+import me.x1no4ekk.core.travel.TravelModule;
+import me.x1no4ekk.core.travel.rtp.RtpModule;
 import me.x1no4ekk.core.user.UserListener;
 import me.x1no4ekk.core.user.UserManager;
 import me.x1no4ekk.core.user.UserRepository;
 import me.x1no4ekk.core.util.MainThreadExecutor;
+import me.x1no4ekk.core.utility.info.InfoModule;
+import me.x1no4ekk.core.utility.moderation.ModerationModule;
+import me.x1no4ekk.core.utility.workstation.WorkstationModule;
+import me.x1no4ekk.core.utility.world.WorldModule;
+import me.x1no4ekk.core.warp.WarpModule;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
@@ -52,6 +64,8 @@ public final class CorePlugin extends JavaPlugin {
     private TeleportService teleportService;
     private CombatManager combatManager;
     private List<CoreModule> modules = List.of();
+    /** Modules whose enable() completed; only these are disabled. */
+    private final List<CoreModule> enabledModules = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -132,6 +146,7 @@ public final class CorePlugin extends JavaPlugin {
         for (CoreModule module : modules) {
             try {
                 module.enable();
+                enabledModules.add(module);
             } catch (RuntimeException e) {
                 getLogger().log(Level.SEVERE, "Module '" + module.id() + "' failed to enable", e);
             }
@@ -158,15 +173,28 @@ public final class CorePlugin extends JavaPlugin {
         List<CoreModule> list = new ArrayList<>();
         list.add(teleportService);
         list.add(combatManager);
+        list.add(new GameplayModule(this));
+        list.add(new WorkstationModule(this));
+        list.add(new ModerationModule(this));
+        list.add(new InfoModule(this));
+        list.add(new WorldModule(this));
+        list.add(new TravelModule(this));
+        list.add(new RtpModule(this));
+        list.add(new WarpModule(this));
+        list.add(new TopModule(this));
+        list.add(new KitModule(this));
+        list.add(new EnderChestModule(this));
+        list.add(new RewardModule(this));
         return list;
     }
 
     @Override
     public void onDisable() {
         getServer().getServicesManager().unregisterAll(this);
-        // Closing menus first lets modules save open containers while the database is still running.
+        // No view may outlive the plugin's classes. Close events are not delivered to a disabling plugin,
+        // so modules persist open containers themselves in disable(), before the database closes.
         GuiListener.closeAll();
-        List<CoreModule> reversed = new ArrayList<>(modules);
+        List<CoreModule> reversed = new ArrayList<>(enabledModules);
         Collections.reverse(reversed);
         for (CoreModule module : reversed) {
             try {
@@ -175,6 +203,7 @@ public final class CorePlugin extends JavaPlugin {
                 getLogger().log(Level.SEVERE, "Module '" + module.id() + "' failed to disable cleanly", e);
             }
         }
+        enabledModules.clear();
         modules = List.of();
         if (teleportHorn != null) {
             teleportHorn.unregisterRecipe();
